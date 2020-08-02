@@ -1,0 +1,11 @@
+Front:
+
+    - Pasar ListOfFilms a page
+    - Corregir comportamiento si se borrar a mano el token del sessionStorage
+
+Back:
+
+    - Mysql
+    - TypeORM
+    - Redux
+    - Diseño UI

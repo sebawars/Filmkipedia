@@ -12,7 +12,8 @@ Back:
 
 General:
 
-    - Tests
+    - README
     - Crear, modificar, eliminar
-    - Paginación y órden
     - Despliegue
+    - Paginación y órden
+    - Tests

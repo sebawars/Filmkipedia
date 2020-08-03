@@ -41,5 +41,11 @@ export const SubTitulo = styled.h2`
 export const Reparto = styled.div`
     display: block;
     text-align: center;
-    flex-wrap: wrap;
 `
+
+export const FilmActions = styled.div`
+    display: block;
+    text-align: center;
+    margin: auto 0;
+`
+

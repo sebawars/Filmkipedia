@@ -17,6 +17,10 @@ export const GlobalStyles = createGlobalStyle`
     font-family: 'Roboto Slab', serif;
   }
 
+  span{
+    font-family: 'Roboto Slab', serif;
+  }
+
   ul, li, h1, h2, h3, p, button { margin: 0; padding: 0; }
   ul { list-style: none; }
   button { background: transparent; border: 0; outline: 0 }
@@ -25,7 +29,7 @@ export const GlobalStyles = createGlobalStyle`
     background: #fefefe;
     height: 100vh;
     margin: 0 auto;
-    max-width: 780px;
+    max-width: 880px;
     overscroll-behavior: none;
     width: 100%; 
     background-color: #f4f4f7;

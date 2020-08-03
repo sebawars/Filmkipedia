@@ -6,13 +6,13 @@ export const Nav = styled.nav`
   background: #fcfcfc;
   border-bottom: 1px solid #e0e0e0;
   top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-between;
   height: 60px;
-  left: 0;
   margin: 0 auto;
   position: fixed;
-  right: 0;
   width: 100%;
   z-index: 1000;
   padding: 0 2em;

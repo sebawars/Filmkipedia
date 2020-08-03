@@ -11,8 +11,9 @@ router.get('/:id', get);
 router.post('/', upsert);
 
 // Internal functions
-function list(req, res, next) {
-    Controller.list()
+async function list(req, res, next) {
+    
+    Controller.list(req.query.order)
         .then((lista) => {
             response.success(req, res, lista, 200);
         })

@@ -24,8 +24,8 @@ async function callApi(endpoint, options = {}) {
 
 const api = {
   film: {
-    list() {
-      return callApi('/film')
+    list(order) {
+      return callApi(`/film?order=${order}`)
     },
     get(filmId) {
       return callApi(`/film/${filmId}`)

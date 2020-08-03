@@ -13,15 +13,17 @@ export const Film = ({ filmname, pais, estreno, director, img, reparto }) => {
         <SubTitulo>Origen: {pais}</SubTitulo>
         <SubTitulo>Director: {director.nombre} {director.apellido}</SubTitulo>
       </Detalles>
+      
       <Reparto>
 
-      <SubTitulo>Reparto:</SubTitulo>
+        <SubTitulo>Reparto:</SubTitulo>
 
-      <Fragment>
-        {reparto.map(actor => <SubTitulo key={actor.id} >{actor.nombre} {actor.apellido}</SubTitulo>)}
-      </Fragment>
-          
+        <Fragment>
+          {reparto.map(actor => <SubTitulo key={actor.id} >{actor.nombre} {actor.apellido}</SubTitulo>)}
+        </Fragment>
+            
       </Reparto>
+
     </Article>
   )
 }

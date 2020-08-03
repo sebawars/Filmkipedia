@@ -1,11 +1,18 @@
 Front:
 
-    - Pasar ListOfFilms a page
-    - Corregir comportamiento si se borrar a mano el token del sessionStorage
+    - Diseño UI
+    - Redux
 
 Back:
 
-    - Mysql
+    - Mysql. Esquema y datos de prueba.
     - TypeORM
-    - Redux
-    - Diseño UI
+    - Swagger
+
+General:
+
+    - README
+    - Crear, modificar, eliminar
+    - Despliegue
+    - Paginación
+    - Tests

@@ -9,9 +9,9 @@ module.exports = function (injectedStore) {
         store = require('../../../store/dummy');
     }
 
-    async function list() {
+    async function list(order) {
 
-        films = await store.list(TABLA);
+        films = await store.list(TABLA, order);
         
         return films;
     }

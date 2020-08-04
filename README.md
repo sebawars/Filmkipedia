@@ -2,7 +2,10 @@
 
 #### Gestión de peliculas.  
 	
-#### Desplegada en: pendiente  
+#### Desplegada en: 
+	
+  * API: http://ec2-35-153-167-17.compute-1.amazonaws.com:8081/api
+  * FRONT: http://ec2-35-153-167-17.compute-1.amazonaws.com:8080
     
 #### Para su armado se utilizó:
 	

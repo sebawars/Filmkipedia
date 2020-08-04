@@ -1,18 +1,19 @@
 Front:
-
-    - Diseño UI
-    - Redux
+    - Paginación. Mecanismo que escale para realizar fetch de a tandas.
+    - Diseño UI general.
+    - Redux.
+    - Favicon.
+    - Expiración token.
 
 Back:
 
     - Mysql. Esquema y datos de prueba.
-    - TypeORM
-    - Swagger
+    - TypeORM.
+    - Swagger.
 
 General:
 
-    - README
-    - Crear, modificar, eliminar
-    - Despliegue
+    - Funcionalidad crear, modificar, eliminar.
+    - Despliegue no dev.
     - Paginación
     - Tests

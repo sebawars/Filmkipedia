@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const AppManifestWebpackPlugin = require('app-manifest-webpack-plugin')
 
 module.exports = {
   devServer: {
@@ -15,8 +16,9 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'src/index.html'
-    }),
+      template: 'src/index.html',
+      favicon: 'src/favicon.png'
+    })
   ],
   module: {
     rules: [

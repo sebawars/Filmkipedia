@@ -35,20 +35,20 @@
 
   * con docker:
 
-       git clone https://github.com/sebawars/VideoClub
-       cd VideoClub/
-       docker-compose build
-       docker-compose up
-       ó
-       docker-compose up -d para independizar CLI
+       git clone https://github.com/sebawars/VideoClub  
+       cd VideoClub/  
+       docker-compose build  
+       docker-compose up  
+       ó  
+       docker-compose up -d para independizar CLI  
        
   * sin docker:
 
-       git clone https://github.com/sebawars/VideoClub
-       cd VideoClub/back
-       npm install
-       npm run start
-       (volver a raíz)
-       cd VideoClub/front
-       npm install
-       npm run start
+       git clone https://github.com/sebawars/VideoClub  
+       cd VideoClub/back  
+       npm install  
+       npm run start  
+       (volver a raíz)  
+       cd VideoClub/front  
+       npm install  
+       npm run start  

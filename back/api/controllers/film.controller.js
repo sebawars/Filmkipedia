@@ -1,19 +1,9 @@
-const express = require('express');
+const response = require('../../network/response');
+const service = require('../services/film.service');
 
-const response = require('../../../network/response');
-const Controller = require('./index');
-
-const router = express.Router();
-
-// Routes
-router.get('/', list);
-router.get('/:id', get);
-router.post('/', upsert);
-
-// Internal functions
 async function list(req, res, next) {
     
-    Controller.list(req.query.order)
+    service.list(req.query.order)
         .then((lista) => {
             response.success(req, res, lista, 200);
         })
@@ -21,7 +11,7 @@ async function list(req, res, next) {
 }
 
 function get(req, res, next) {
-    Controller.get(req.params.id)
+    service.get(req.params.id)
         .then((user) => {
             response.success(req, res, user, 200);
         })
@@ -29,11 +19,15 @@ function get(req, res, next) {
 }
 
 function upsert(req, res, next) {
-    Controller.upsert(req.body)
+    service.upsert(req.body)
         .then((user) => {
             response.success(req, res, user, 201);
         })
         .catch(next);
 }
 
-module.exports = router;
+module.exports = {
+    list,
+    get,
+    upsert
+};

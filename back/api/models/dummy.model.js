@@ -1,6 +1,6 @@
 const nanoid = require('nanoid');
 
-const err = require('../utils/error');
+const err = require('../../utils/error');
 
 const db = {
     'film': [

@@ -4,6 +4,7 @@ Front:
     - Redux.
     - Favicon.
     - Expiración token.
+    - URL de API paramatrizable
 
 Back:
 
@@ -16,4 +17,5 @@ General:
     - Funcionalidad crear, modificar, eliminar.
     - Despliegue no dev.
     - Paginación
+    - Refactor general
     - Tests

@@ -1,4 +1,10 @@
-const BASE_URL = 'http://192.168.0.11:3005/api'
+const BASE_URL = `http://192.168.0.11:3005/api`
+
+/*                  (process.env.ENV === 'development')
+                    ? `http://${process.env.API_DEV_HOST}:${process.env.API_DEV_PORT}/api` 
+                    : `http://${process.env.API_PROD_HOST}:${process.env.API_PROD_PORT}/api`
+
+*/
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 const randomNumber = (min = 0, max = 1) =>

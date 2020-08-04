@@ -4,7 +4,7 @@
   "description": "Web app video films",
   "main": "index.js",
   "scripts": {
-    "now-build": "npm run build",
+    "start": "npm run dev",
     "build": "webpack",
     "lint": "standard",
     "dev": "webpack-dev-server --history-api-fallback --host 0.0.0.0",

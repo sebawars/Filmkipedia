@@ -1,4 +1,4 @@
-const BASE_URL = `http://192.168.0.11:3005/api`
+const BASE_URL = `http://192.168.0.11:8081/api`
 
 /*                  (process.env.ENV === 'development')
                     ? `http://${process.env.API_DEV_HOST}:${process.env.API_DEV_PORT}/api` 

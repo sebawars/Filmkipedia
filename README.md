@@ -30,3 +30,12 @@
   * Testing:
        Supertest, mocha, sinon, proxyquire en server.  
        Cypress en front.  
+
+#### Para su armado se utilizó:
+
+       git clone https://github.com/sebawars/VideoClub
+       cd VideoClub/
+       docker-compose build
+       docker-compose up
+       ó
+       docker-compose up -d para independizar CLI

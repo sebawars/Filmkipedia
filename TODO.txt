@@ -6,7 +6,6 @@ Front:
     - URL de API paramatrizable
 
 Back:
-
     - Mysql. Esquema y datos de prueba.
     - TypeORM.
     - Swagger.

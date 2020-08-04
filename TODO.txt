@@ -1,7 +1,6 @@
 Front:
     - Paginación. Mecanismo que escale para realizar fetch de a tandas.
     - Diseño UI general.
-    - Redux.
     - Favicon.
     - Expiración token.
     - URL de API paramatrizable

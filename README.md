@@ -31,7 +31,9 @@
        Supertest, mocha, sinon, proxyquire en server.  
        Cypress en front.  
 
-#### Pasos despliegue:
+#### Pasos despliegue (necesario tener libres puertos 8080 y 8081):
+
+  * Pasos despliegue con docker:
 
        git clone https://github.com/sebawars/VideoClub
        cd VideoClub/
@@ -39,3 +41,13 @@
        docker-compose up
        ó
        docker-compose up -d para independizar CLI
+       
+  * Pasos despliegue sin docker:
+
+       git clone https://github.com/sebawars/VideoClub
+       cd VideoClub/back
+       npm install
+       npm run start
+       cd VideoClub/front
+       npm install
+       npm run start

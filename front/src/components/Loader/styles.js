@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
 export const LoaderCont = styled.div`
-    display: inline-block;
     position: relative;
     width: 64px;
     height: 64px;
+    margin: auto;
 
     div {
         position: absolute;

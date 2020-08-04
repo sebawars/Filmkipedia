@@ -1,23 +1,22 @@
-import React, { Fragment } from 'react'
-import { UserForm } from '../../components/UserForm'
-import api from '../../api'
+import React, { Fragment, useState } from 'react'
+import { Film } from '../../components/Film'
+import { FilmForm } from '../../components/FilmForm'
 
-export const LoginPage = () => {
-    
-    const onSubmitLogin = async ( inputUser ) => {
-        const data = await api.user.login(inputUser)   
-        return data
-    }
+export const FilmDetails = (props) => {
 
-    const onSubmitRegister = async ( inputUser ) => {
-        const data = await api.user.register(inputUser)   
-        return data
-    }
+  const [ filmData, setFilmData ] = useState({...props.location.state})
 
-    return (
+  const handleChange = e => {
+    setFilmData({
+        ...filmData,
+        [e.target.name]: e.target.value
+    });
+  };
+
+  return (
     <Fragment>
-      <UserForm title='Iniciar sesión' buttonTitle='Login' onSubmit={onSubmitLogin} />
-      <UserForm title='Registro' buttonTitle='Registro' onSubmit={onSubmitRegister} />
+      <Film {...filmData} key={1} onChange={handleChange}></Film>
+      <FilmForm {...filmData} key={2} onChange={handleChange}/>
     </Fragment>
-    )
+  )
 }

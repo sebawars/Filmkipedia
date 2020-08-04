@@ -28,17 +28,13 @@ const compareByFilmname = (a, b) => {
 }
 
 async function list(tabla, order) {
-    console.log('order: '+ order);
     if(order === 'asc'){
-        console.log('asc');
         return db[tabla].sort(compareByFilmname);
     }
     else if(order === 'desc'){
-        console.log('desc');
         return db[tabla].sort(compareByFilmname).reverse();
     }
     else {
-        console.log('Sin order');
         return db[tabla] || [];
     }
 }

@@ -2,6 +2,17 @@ import styled from 'styled-components'
 
 
 export const Article = styled.article`
+
+  @media (max-width: 1368px){
+    margin-left: 1em; 
+    margin-right: 1em;
+  }
+
+  a{
+      text-decoration: inherit;
+      color: inherit;
+  }
+
   background: #FFFFFF;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.23);
   border-radius: 7px;
@@ -10,6 +21,7 @@ export const Article = styled.article`
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  margin-bottom: 1em;
 `
 
 export const Title = styled.h1`
@@ -25,7 +37,7 @@ export const Anio = styled.span`
 `
 
 export const Imagen = styled.img`
-  width: 100%;
+  max-width: 300px;
 `
 
 export const TitleYear = styled.div`
@@ -33,4 +45,5 @@ export const TitleYear = styled.div`
   align-items: center;
   margin: 0.25em 0;
   min-height: 4.5em;
+  justify-content: center;
 `

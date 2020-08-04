@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3005/api'
+const BASE_URL = 'http://192.168.0.11:3005/api'
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 const randomNumber = (min = 0, max = 1) =>
@@ -55,8 +55,11 @@ const api = {
         body: JSON.stringify(inputUser),
       })
     },
-    register(filmId) {
-      return callApi('/user/register')
+    register(inputUser) {
+      return callApi('/user/register', {
+        method: 'POST',
+        body: JSON.stringify(inputUser),
+      })
     }
   }
 }

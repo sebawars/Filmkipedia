@@ -2,22 +2,20 @@ import styled from 'styled-components'
 
 export const ListaPeliculas = styled.ul`
     margin: 0 auto;
-    min-width: 830px;
-    margin: 30px auto;
-    text-align: center;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 1em;
+    margin: 2em auto;
+    justify-content: space-evenly;
+    display: flex;
+    flex-wrap: wrap;
 `
 
 export const OptionsContainer = styled.div`
     margin-left: 2em;
     margin-right: 2em;
-    margin-top: 90px;
-    font-size: 24px;
+    font-size: 1.3em;
     align-items: center;
     display: flex;
     justify-content: space-between;
+    margin-top: 2em;
 `
 
 export const OrderContainer = styled.div`    

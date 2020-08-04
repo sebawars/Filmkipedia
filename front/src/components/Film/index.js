@@ -7,9 +7,10 @@ export const Film = ({ filmname, pais, estreno, director, img, reparto }) => {
     <Article >
       <Imagen src={img} />
       <Detalles>
-        <Title>{filmname} </Title>
-        <Anio>({estreno})</Anio>
-        <hr />
+        <div>
+          <Title>{filmname} </Title>
+          <Anio>({estreno})</Anio>
+        </div>
         <SubTitulo>Origen: {pais}</SubTitulo>
         <SubTitulo>Director: {director.nombre} {director.apellido}</SubTitulo>
       </Detalles>

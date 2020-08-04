@@ -1,6 +1,6 @@
 import React, { useState, useContext, Fragment } from 'react'
 import { useInputValue } from '../../hooks/useInputValue'
-import { Error, Form, Input, Title, SubmitButton } from './styles'
+import { Error, Form, Title } from './styles'
 import { Context } from '../../Context'
 
 export const UserForm = ({ title, buttonTitle, onSubmit }) => {
@@ -15,23 +15,15 @@ export const UserForm = ({ title, buttonTitle, onSubmit }) => {
 
   const handleSubmit = async (event) => {
 
+    setErrForm('')
+
     event.preventDefault()
 
-    console.log('password.value: ' + password.value)
-
     if (!validateEmail(email.value)) {
-
-      console.log('REVISE EMAIL!!!!')
-      console.log('email.value: ' + email.value)
       setErrForm('Email inválido')
-
     } else if (password.value == '') {
-
-      console.log('INGRESE PASS!!!!')
       setErrForm('Ingrese password')
-
     } else {
-
       const data = await onSubmit({
         username: email.value,
         password: password.value
@@ -52,9 +44,9 @@ export const UserForm = ({ title, buttonTitle, onSubmit }) => {
     <Fragment>
       <Form onSubmit={handleSubmit}>
         <Title>{title}</Title>
-        <Input placeholder='Email' {...email} />
-        <Input placeholder='Password' type='password' {...password} />
-        <SubmitButton> {buttonTitle} </SubmitButton>
+        <input placeholder='Email' {...email} />
+        <input placeholder='Password' type='password' {...password} />
+        <button> {buttonTitle} </button>
         <br></br>
         {errForm && <Error>{errForm}</Error>}
       </Form>

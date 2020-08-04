@@ -1,6 +1,7 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { UserForm } from '../../components/UserForm'
 import api from '../../api'
+import { FormsContainer } from './styles'
 
 export const LoginPage = () => {
     
@@ -15,9 +16,9 @@ export const LoginPage = () => {
     }
 
     return (
-    <Fragment>
-      <UserForm title='Iniciar sesión' buttonTitle='Login' onSubmit={onSubmitLogin} />
-      <UserForm title='Registro' buttonTitle='Registro' onSubmit={onSubmitRegister} />
-    </Fragment>
+      <FormsContainer>
+        <UserForm title='Iniciar sesión' buttonTitle='Login' onSubmit={onSubmitLogin} />
+        <UserForm title='Registro' buttonTitle='Registro' onSubmit={onSubmitRegister} />
+      </FormsContainer>
     )
 }

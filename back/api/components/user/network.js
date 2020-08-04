@@ -15,6 +15,7 @@ router.post('/login', function(req, res, next) {
 })
 
 router.post('/register', function(req, res, next) {
+    
     Controller.register({username: req.body.username, password: req.body.password})
         .then(token => {
             response.success(req, res, token, 200);

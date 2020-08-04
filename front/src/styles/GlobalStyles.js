@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyles = createGlobalStyle`
 
@@ -29,15 +29,65 @@ export const GlobalStyles = createGlobalStyle`
     background: #fefefe;
     height: 100vh;
     margin: 0 auto;
-    max-width: 880px;
     overscroll-behavior: none;
-    width: 100%; 
+    max-width: 50%;
     background-color: #f4f4f7;
+
+    @media (max-width: 1280px){
+      max-width: 60%;
+      font-size: 14px;
+    }
+
+    @media (max-width: 1024px){
+      max-width: 80%;
+      font-size: 13px;
+    }
+
+    @media (max-width: 1024px){
+      max-width: 95%;
+      font-size: 12px;
+    }
+
+    button{
+      height: 2em;
+      width: 5em;
+      border-radius: 0.3em;
+      background-color: #1c3643;
+      color: #90a4ae;
+    }
+
+    input{
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      margin-bottom: 8px;
+      padding: 8px 4px;
+      width: 100%;
+      &[disabled] {
+        opacity: .3;
+      }
+    }
+
   }
+
 
   #app {
     box-shadow: 0 0 10px rgba(0, 0, 0, .05);
     overflow-x: hidden;
     min-height: 100vh;
   }
+`
+
+export const Main = styled.main`
+    min-height: calc(100vh - 60px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 4em;
+
+    #mainRouter{
+      width: inherit;
+      text-align: center;
+    }
+
 `

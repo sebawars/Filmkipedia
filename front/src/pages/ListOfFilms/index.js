@@ -10,9 +10,7 @@ export const ListOfFilms = () => {
   const [films, setFilms] = useState([])
   const [loading, setLoading] = useState(false)
   const [order, setOrder] = useState('')
-  const [selectList, setSelectList] = useState([  { value: '1', label: '1' },
-  { value: '2', label: '2' },
-  { value: '3', label: '3' }])
+  const [selectList, setSelectList] = useState([  { value: '1', label: '1' }, { value: '2', label: '2' }, { value: '3', label: '3' }])
 
   const customSelectStyles = {
     control: base => ({

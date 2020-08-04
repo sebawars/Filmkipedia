@@ -7,13 +7,13 @@ FROM node:10
 WORKDIR /usr/src/app
  
 # Copies package.json and package-lock.json to Docker environment
-COPY package*.json ./
+COPY ./front/package*.json ./
  
 # Installs all node packages
 RUN npm install
  
 # Copies everything over to Docker environment
-COPY . .
+COPY ./front ./
  
 # Uses port which is used by the actual application
 EXPOSE 8080

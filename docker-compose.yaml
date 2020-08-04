@@ -1,0 +1,19 @@
+version: "2.1"
+
+services:
+  back_video:
+    build:
+      context: .
+      dockerfile: back/Dockerfile
+    image: "back_video_image"
+    container_name: "back_video_container"
+    ports:
+    - "8081:8081"
+  front_video:
+    build:
+      context: .
+      dockerfile: front/Dockerfile
+    image: "front_video_image"
+    container_name: "front_video_container"
+    ports:
+    - "8080:8080"

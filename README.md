@@ -31,7 +31,7 @@
        Supertest, mocha, sinon, proxyquire en server.  
        Cypress en front.  
 
-#### Para su armado se utilizó:
+#### Pasos despliegue:
 
        git clone https://github.com/sebawars/VideoClub
        cd VideoClub/

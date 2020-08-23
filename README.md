@@ -1,12 +1,25 @@
 ## Web VideoClub ⚛️
 
 #### Gestión de peliculas.  
+
+#### Consigna: 
+
+  * https://docs.google.com/document/d/14jKTeA8q1l9uxC2UCbbh9w9RxtRa0bzUXXr5-lmdD80/edit
 	
 #### Desplegada en: 
 	
-  * API: http://ec2-35-153-167-17.compute-1.amazonaws.com:3010/api
+  * API: http://ec2-35-153-167-17.compute-1.amazonaws.com:3010
   * FRONT: http://ec2-35-153-167-17.compute-1.amazonaws.com:3011
     
+#### Diagrama de clases:
+
+  * https://app.diagrams.net/#G1B5BsmrNDS8ifElJnjf0V8BynSa1hWRay
+
+#### Swagger:
+
+  * http://ec2-35-153-167-17.compute-1.amazonaws.com:3010/api
+
+
 #### Para su armado se utilizó:
 	
   * Obtención de datos:

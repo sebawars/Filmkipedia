@@ -1,19 +1,22 @@
 import React from 'react'
-import { Article, Title, Imagen, Anio, TitleYear } from './styles'
 import { Link } from '@reach/router'
+import { Article, Title, Imagen, Anio, TitleYear } from './styles'
+import { filmByIdSelector } from '../../redux/selectors/filmSelector'
+import { useSelector } from 'react-redux';
 
-export const ListFilm = ( film = { filmname, pais, estreno, director, img, reparto } ) => {
+export const ListFilm = ( { id } ) => {
 
-  console.log(JSON.stringify(film));
+  const state = useSelector((state) => state);
+  const film = filmByIdSelector(id)(state)
 
   return (
     <Article >
-      <Link to={ `/film/${film.id}` } state={{ ...film }}  >
+      <Link to={ `/film/${film.id}` } state={film}  >
 
-        <Imagen src={film.img} />
+        <Imagen src={film.image} />
 
         <TitleYear>
-          <Title>{film.filmname}</Title><Anio>({film.estreno})</Anio>
+          <Title>{film.filmname}</Title><Anio>({film.release})</Anio>
         </TitleYear>
 
       </Link>

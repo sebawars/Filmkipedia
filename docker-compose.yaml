@@ -8,7 +8,7 @@ services:
     image: "back_video_image"
     container_name: "back_video_container"
     ports:
-    - "8081:8081"
+    - "3010:3010"
   front_video:
     build:
       context: .
@@ -16,4 +16,4 @@ services:
     image: "front_video_image"
     container_name: "front_video_container"
     ports:
-    - "8080:8080"
+    - "3011:3011"

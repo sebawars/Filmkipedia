@@ -1,5 +1,9 @@
 dist/
+build/
 
 # dependencies
 node_modules/
+
 .env
+package-lock.json
+yarn.lock

@@ -1,19 +1,8 @@
 Front:
     - Paginación. Mecanismo que escale para realizar fetch de a tandas.
     - Diseño UI general.
-    - Favicon.
-    - Expiración token.
-    - URL de API paramatrizable
+    - Funcionalidad crear, modificar, eliminar.
+    - En listOfFilms obtener del store solamente id, title e img.
 
 Back:
-    - Mysql. Esquema y datos de prueba.
-    - TypeORM.
-    - Swagger.
-
-General:
-
-    - Funcionalidad crear, modificar, eliminar.
-    - Despliegue no dev.
-    - Paginación
-    - Refactor general
-    - Tests
+    - Respuesta y catcheo de error adecuado al intentar crear user con username existente.

@@ -4,22 +4,22 @@
 	
 #### Desplegada en: 
 	
-  * API: http://ec2-35-153-167-17.compute-1.amazonaws.com:8081/api
-  * FRONT: http://ec2-35-153-167-17.compute-1.amazonaws.com:8080
+  * API: http://ec2-35-153-167-17.compute-1.amazonaws.com:3010/api
+  * FRONT: http://ec2-35-153-167-17.compute-1.amazonaws.com:3011
     
 #### Para su armado se utilizó:
 	
   * Obtención de datos:
-       BD: JSON dummy en memoria (a futuro TyperORM y MYSQL)
        fetch hacia la API.  
-       Servidor en Express.  
+       Servidor en Nest JS con TypeORM.  
+       BD: MYSQL  
        
   * Despliegue:
        Contenedor Docker.  
        AWS EC2.  
   
   * Empaquetador y transpilador front:
-       Webpack, Babel
+       Webpack, Babel (interno de create-react-app)
 			
   * Estilado con CSS en JS con:
        styled-components
@@ -28,10 +28,10 @@
        Reach Router
 			
   * Testing:
-       Supertest, mocha, sinon, proxyquire en server.  
+       Jest. Pruebas unitarias de servicios en server.  
        Cypress en front.  
 
-#### Pasos despliegue (necesario tener libres puertos 8080 y 8081):
+#### Pasos despliegue (necesario tener libres puertos 3010 y 3011):
 
   * con docker:
 

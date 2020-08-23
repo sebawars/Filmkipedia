@@ -1,18 +1,26 @@
 import React from 'react'
-import { UserForm } from '../../components/UserForm'
+import UserForm from '../../components/UserForm'
 import api from '../../api'
 import { FormsContainer } from './styles'
 
 export const LoginPage = () => {
     
     const onSubmitLogin = async ( inputUser ) => {
-        const data = await api.user.login(inputUser)   
-        return data
+        const res = await api.user.login(inputUser)   
+        
+        return res.data
     }
 
     const onSubmitRegister = async ( inputUser ) => {
-        const data = await api.user.register(inputUser)   
-        return data
+        const res = await api.user.register(inputUser)
+
+        if (res.status !== 201){
+          return {}
+        }
+
+        const body = await api.user.login(inputUser)
+
+        return body.data
     }
 
     return (

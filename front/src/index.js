@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Context from './Context'
-
-import { App } from './App'
+import store from './redux/store';
+import { Provider } from 'react-redux';
+import App from './App'
 
 ReactDOM.render(
-  <Context.Provider>
+  <Provider store={store}>
     <App />
-  </Context.Provider>,
+  </Provider>,
   document.getElementById('app'))

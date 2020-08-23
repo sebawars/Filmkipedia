@@ -1,10 +1,4 @@
-const BASE_URL = `http://192.168.0.11:8081/api`
-
-/*                  (process.env.ENV === 'development')
-                    ? `http://${process.env.API_DEV_HOST}:${process.env.API_DEV_PORT}/api` 
-                    : `http://${process.env.API_PROD_HOST}:${process.env.API_PROD_PORT}/api`
-
-*/
+const BASE_URL = `http://${process.env.REACT_APP_API_DOMAIN}:${process.env.REACT_APP_API_PORT}`
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 const randomNumber = (min = 0, max = 1) =>
@@ -16,53 +10,63 @@ async function callApi(endpoint, options = {}) {
   
   await simulateNetworkLatency()
 
-  options.headers = {
+  const baseHeaders = {
     'Content-Type': 'application/json',
-    Accept: 'application/json',
+    Accept: 'application/json'
   }
 
-  const url = BASE_URL + endpoint
-  const response = await fetch(url, options)
-  const data = await response.json()
+  options.headers = { ...baseHeaders, ...options.headers }
 
-  return data
+  const url = BASE_URL + endpoint
+  const res = await fetch(url, options)
+  const data = (res.headers.get("Content-Length") !== '0' && await res.json()) || {};
+  const status = res.status;
+
+  const response = {
+    data,
+    status
+  }
+
+  return response;
 }
+
+const authorizationHeader = (token) => { return {'Authorization': 'Bearer ' + token} }
 
 const api = {
   film: {
-    list(order) {
-      return callApi(`/film?order=${order}`)
+    list(order, token) {
+      return callApi(`/film${order ? '?order='+order : ''}`, {headers: authorizationHeader(token)})
     },
-    get(filmId) {
-      return callApi(`/film/${filmId}`)
-    },
-    create(newFilm) {
+    create(newFilm, token) {
       return callApi('/film', {
         method: 'POST',
         body: JSON.stringify(newFilm),
+        headers: authorizationHeader(token)
       })
     },
-    edit(filmId, modifiedFilm) {
+    edit(filmId, modifiedFilm, token) {
       return callApi(`/film/${filmId}`, {
         method: 'PUT',
         body: JSON.stringify(modifiedFilm),
+        headers: authorizationHeader(token)
       })
     },
-    edit(filmId) {
+    delete(filmId, token) {
       return callApi(`/film/${filmId}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: authorizationHeader(token)
       })
     }
   },
   user: {
     login(inputUser) {
-      return callApi('/user/login', {
+      return callApi('/auth/login', {
         method: 'POST',
         body: JSON.stringify(inputUser),
       })
     },
     register(inputUser) {
-      return callApi('/user/register', {
+      return callApi('/user', {
         method: 'POST',
         body: JSON.stringify(inputUser),
       })

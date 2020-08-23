@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { FilmEdit, ButtonContainer, InputContainer } from './styles'
 
-export const FilmForm = ( { filmname, pais, estreno, director, img, reparto, onChange } ) => {
+export const FilmForm = ( { filmname, country, release, director, image, cast, onChange } ) => {
 
 
   const handleSubmit = (event) => {
@@ -20,11 +20,11 @@ export const FilmForm = ( { filmname, pais, estreno, director, img, reparto, onC
           </div>
           <div>
               <h1>Estreno</h1>
-              <input value={estreno} onChange={onChange} name='estreno'/>
+              <input value={release} onChange={onChange} name='release'/>
           </div>
           <div>
               <h1>Origen</h1>
-              <input value={pais} onChange={onChange} name='pais'/>
+              <input value={country} onChange={onChange} name='country'/>
           </div>
           { /*reparto.map( actor => <input value={actor.nombre} onChange={onChange} name=''/> ) */}
         </InputContainer>

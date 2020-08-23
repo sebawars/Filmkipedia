@@ -30,21 +30,19 @@ export const GlobalStyles = createGlobalStyle`
     height: 100vh;
     margin: 0 auto;
     overscroll-behavior: none;
-    max-width: 50%;
+    max-width: 70%;
     background-color: #f4f4f7;
 
-    @media (max-width: 1280px){
-      max-width: 60%;
+    @media (max-width: 1385px){
+      max-width: 85%;
       font-size: 14px;
     }
 
     @media (max-width: 1024px){
-      max-width: 80%;
       font-size: 13px;
     }
 
     @media (max-width: 1024px){
-      max-width: 95%;
       font-size: 12px;
     }
 

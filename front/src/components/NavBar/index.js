@@ -1,21 +1,29 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Link, Nav, Title } from './styles'
 import { FcFilmReel } from 'react-icons/fc'
 import { FiPower } from 'react-icons/fi'
-import { Context } from '../../Context'
+import { useSelector, useDispatch } from 'react-redux';
+import { setAuth as setAuthAction } from '../../redux/actions/set-auth';
+import { removeTokenStorage } from '../../util/storage'
 
-export const NavBar = ( { isAuth } ) => {
+const NavBar = () => {
 
-  const { removeAuth } = useContext(Context)
+  // Redux
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const setAuth = (auth) => dispatch(setAuthAction(auth))
+
   const handleLogout = () => {    
-    removeAuth()
+    setAuth(null)
+    removeTokenStorage()
   }
-
 
   return (
     <Nav>
       <Link to='/'><div><FcFilmReel size='35px'/></div><Title>VideoClub</Title></Link>
-      { isAuth && <Link to='/' onClick={handleLogout} ><div><FiPower size='30px'/></div><br />Salir</Link> }
+      { auth && <Link to='/' onClick={handleLogout} ><div><FiPower size='30px'/></div><br />Salir</Link> }
     </Nav>
   )
 }
+
+export default NavBar;

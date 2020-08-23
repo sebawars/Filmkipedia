@@ -13,6 +13,8 @@ export const FilmDetails = (props) => {
     });
   };
 
+  
+
   return (
     <Fragment>
       <Film {...filmData} key={1} onChange={handleChange}></Film>

@@ -1,19 +1,26 @@
-import React, { useState, useContext, Fragment } from 'react'
+import React, { useState, Fragment } from 'react'
 import { useInputValue } from '../../hooks/useInputValue'
 import { Error, Form, Title } from './styles'
-import { Context } from '../../Context'
+import { useDispatch } from 'react-redux';
+import { setAuth as setAuthAction } from '../../redux/actions/set-auth';
+import { setTokenStorage } from '../../util/storage'
 
-export const UserForm = ({ title, buttonTitle, onSubmit }) => {
+const UserForm = ( {title, buttonTitle, onSubmit} ) => {
   const email = useInputValue('')
   const password = useInputValue('')
   const [ errForm, setErrForm ] = useState('')
-  const { activateAuth } = useContext(Context)
+  
+  // Redux
+  const dispatch = useDispatch();
+  const setAuth = (auth) => dispatch(setAuthAction(auth))
 
   const validateEmail = (email) => {
     return ((email) && (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)))
   }
+  
 
-  const handleSubmit = async (event) => {
+
+  async function handleSubmit(event){
 
     setErrForm('')
 
@@ -21,7 +28,7 @@ export const UserForm = ({ title, buttonTitle, onSubmit }) => {
 
     if (!validateEmail(email.value)) {
       setErrForm('Email inválido')
-    } else if (password.value == '') {
+    } else if (password.value === '') {
       setErrForm('Ingrese password')
     } else {
       const data = await onSubmit({
@@ -29,11 +36,12 @@ export const UserForm = ({ title, buttonTitle, onSubmit }) => {
         password: password.value
       })
 
-      if (data.error) setErrForm(data.body)
+      if (!data.access_token) setErrForm('Verifique usuario/contraseña')
 
       else { 
         setErrForm('')
-        activateAuth(data.body)
+        setAuth(data.access_token)
+        setTokenStorage(data.access_token)
       }
 
     }
@@ -53,3 +61,5 @@ export const UserForm = ({ title, buttonTitle, onSubmit }) => {
     </Fragment>
   )
 }
+
+export default UserForm;

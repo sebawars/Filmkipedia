@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const ListaPeliculas = styled.ul`
+export const FilmsContainer = styled.ul`
     margin: 0 auto;
     margin: 2em auto;
     justify-content: space-evenly;

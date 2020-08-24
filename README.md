@@ -8,8 +8,8 @@
 	
 #### Desplegada en: 
 	
-  * API: http://ec2-35-153-167-17.compute-1.amazonaws.com:3010
-  * FRONT: http://ec2-35-153-167-17.compute-1.amazonaws.com:3011
+  * API: http://ec2-52-87-152-250.compute-1.amazonaws.com:3010
+  * FRONT: http://ec2-52-87-152-250.compute-1.amazonaws.com:3011
     
 #### Diagrama de clases:
 
@@ -17,7 +17,7 @@
 
 #### Swagger:
 
-  * http://ec2-35-153-167-17.compute-1.amazonaws.com:3010/api
+  * http://ec2-52-87-152-250.compute-1.amazonaws.com:3010/api/
 
 
 #### Para su armado se utilizó:

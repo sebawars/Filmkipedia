@@ -6,22 +6,26 @@ const entitiesSelector = state => state.entities
 
 export const filmByIdSelector = id => createSelector(
   entitiesSelector,
-  resultSelector,
-  (entities, result) => {
-    if( !result || !entities )
+  (entities) => {
+    if( !entities )
       return null
-    // console.log('entities: '+ JSON.stringify(entities))
-    // console.log('entities.films: '+ JSON.stringify(entities.films))
-    // console.log('id: '+ JSON.stringify(id))
-    // console.log('entities.films[id] : '+ JSON.stringify(entities.films[String(id)]))
+      
     const partialFilm = { ...entities.films[String(id)] } 
-    // console.log('partialFilm: '+ JSON.stringify(partialFilm))
     partialFilm.director = entities.directors[partialFilm.director]
     partialFilm.cast = partialFilm.cast.map(actor => entities.actors[actor])
     return partialFilm
   }
 )
 
+export const filmIdListSelector = createSelector(
+  entitiesSelector,
+  (entities) => {
+    if( !entities )
+      return []
+
+    return Object.keys(entities.films)
+  }
+)
 
 export const filmListSelector = createSelector(
   entitiesSelector,

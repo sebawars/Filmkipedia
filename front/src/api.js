@@ -34,8 +34,13 @@ const authorizationHeader = (token) => { return {'Authorization': 'Bearer ' + to
 
 const api = {
   film: {
-    list(order, token) {
-      return callApi(`/film${order ? '?order='+order : ''}`, {headers: authorizationHeader(token)})
+    async list(order, token) {
+      const res = await callApi(`/film${order ? '?order='+order : ''}`, {headers: authorizationHeader(token)})
+
+      if(res.status !== 200) 
+        throw new Error(res.status)
+
+      return res.data
     },
     create(newFilm, token) {
       return callApi('/film', {

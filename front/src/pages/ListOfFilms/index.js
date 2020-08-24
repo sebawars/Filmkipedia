@@ -2,18 +2,12 @@ import React, { useState, useEffect, Fragment } from 'react'
 import Select from 'react-select'
 import { AiOutlineSortDescending, AiOutlineSortAscending } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux';
-import { setEntities as setEntitiesAction } from '../../redux/actions/set-entities';
-import { setResult as setResultAction } from '../../redux/actions/set-result';
-import { setLoading as setLoadingAction } from '../../redux/actions/set-loading';
-import { setAuth as setAuthAction } from '../../redux/actions/set-auth';
 
+import { FilmsContainer, OptionsContainer, OrderContainer } from './styles'
 import { Loader } from '../../components/Loader'
 import { ListFilm } from '../../components/ListFilm'
-import { FilmsContainer, OptionsContainer, OrderContainer } from './styles'
-import api from '../../api'
-import { normalizeFilms } from '../../redux/normalizers'
-import { filmListSelector } from '../../redux/selectors/filmSelector'
-import { removeTokenStorage } from '../../util/storage'
+import { fetchFilms as fetchFilmsAction } from '../../redux/actions/fetch-films';
+import { filmIdListSelector } from '../../redux/selectors/filmSelector'
 
 const ListOfFilms = () => {
 
@@ -24,14 +18,11 @@ const ListOfFilms = () => {
   const auth = useSelector((state) => state.auth);
   const loading = useSelector((state) => state.loading);
   const state = useSelector((state) => state);
-  const films = filmListSelector(state)
+  const filmIds = filmIdListSelector(state)
 
   const dispatch = useDispatch();
   
-  const setAuth = (auth) => dispatch(setAuthAction(auth))  
-  const setEntities = (entities) => dispatch(setEntitiesAction(entities))
-  const setResult = (result) => dispatch(setResultAction(result))
-  const setLoading = (loading) => dispatch(setLoadingAction(loading))
+  const fetchFilms = (id, order, auth) => dispatch(fetchFilmsAction(id, order, auth))
 
   const customSelectStyles = {
     control: base => ({
@@ -40,28 +31,8 @@ const ListOfFilms = () => {
     })
   };
 
-
-
   useEffect(function () {
-    setLoading(true)
-    api.film.list(order, auth)
-      .then(res => {
-        console.log('FETCH!')
-
-        if(res.status === 200){
-          const dataNormalizada = normalizeFilms(res.data)
-          const entities = dataNormalizada.entities
-          const result = dataNormalizada.result
-          console.log('res.data: '+ JSON.stringify(res.data))
-          console.log('dataNormalizada: '+ JSON.stringify(dataNormalizada))
-          setEntities(entities)
-          setResult(result)
-        } else{
-          removeTokenStorage()
-          setAuth(null)  
-        }
-        setLoading(false)
-      })
+    fetchFilms(null, order, auth)
   }, [order])
 
   return (
@@ -81,7 +52,7 @@ const ListOfFilms = () => {
 
               <FilmsContainer>
                 {
-                  films.map(film => <ListFilm key={film.id} id={film.id} />)
+                  filmIds.map(filmId => <ListFilm key={filmId} id={filmId} />)
                 }
               </FilmsContainer>
             </Fragment>

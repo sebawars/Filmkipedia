@@ -6,3 +6,4 @@ Front:
 
 Back:
     - Respuesta y catcheo de error adecuado al intentar crear user con username existente.
+    - Setear puertos por envitornment de docker

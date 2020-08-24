@@ -1,6 +1,19 @@
 version: "2.1"
 
 services:
+  db:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'pass'
+      MYSQL_ROOT_PASSWORD: 'pass'
+      MYSQL_DATABASE: 'video'
+    volumes:
+      - db-data:/home/ec2-user/VideoClub/mysql/volume
+    ports:
+      - "3306:3306"
   back_video:
     build:
       context: .
@@ -8,7 +21,9 @@ services:
     image: "back_video_image"
     container_name: "back_video_container"
     ports:
-    - "3010:3010"
+      - "3010:3010"
+    links:
+      - "db:container_db"
   front_video:
     build:
       context: .
@@ -17,3 +32,6 @@ services:
     container_name: "front_video_container"
     ports:
     - "3011:3011"
+    stdin_open: true
+volumes:
+  db-data:

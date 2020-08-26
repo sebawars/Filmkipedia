@@ -15,7 +15,7 @@ const NavBar = () => {
 
   const handleLogout = () => {    
     setAuth(null)
-    removeTokenStorage()
+    // removeTokenStorage()
   }
 
   return (

@@ -15,7 +15,6 @@ async function login(username, password) {
         .then(sonIguales => {
             if (sonIguales === true) {
                 // Generar token;
-                console.log(data);
                 return auth.sign({ ...data })
             } else {
                 throw err('Verifique usuario/contrasenia', 400);

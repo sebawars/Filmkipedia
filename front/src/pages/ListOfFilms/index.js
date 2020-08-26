@@ -7,7 +7,6 @@ import { FilmsContainer, OptionsContainer, OrderContainer } from './styles'
 import { Loader } from '../../components/Loader'
 import { ListFilm } from '../../components/ListFilm'
 import { fetchFilms as fetchFilmsAction } from '../../redux/actions/fetch-films';
-import { filmIdListSelector } from '../../redux/selectors/filmSelector'
 
 const ListOfFilms = () => {
 
@@ -15,10 +14,8 @@ const ListOfFilms = () => {
   const [selectList] = useState([  { value: '1', label: '1' }, { value: '2', label: '2' }, { value: '3', label: '3' }])
 
   // Redux
-  const auth = useSelector((state) => state.auth);
-  const loading = useSelector((state) => state.loading);
-  const state = useSelector((state) => state);
-  const filmIds = filmIdListSelector(state)
+  const { fetchInfo, auth, result } = useSelector((state) => state);
+  const filmIds = result
 
   const dispatch = useDispatch();
   
@@ -35,10 +32,11 @@ const ListOfFilms = () => {
     fetchFilms(null, order, auth)
   }, [order])
 
+
   return (
     <Fragment>
       {
-        loading
+        fetchInfo.films.fetching
           ? <Loader />
           : <Fragment>
               <OptionsContainer>
@@ -52,11 +50,10 @@ const ListOfFilms = () => {
 
               <FilmsContainer>
                 {
-                  filmIds.map(filmId => <ListFilm key={filmId} id={filmId} />)
+                  filmIds && filmIds.map(filmId => <ListFilm key={filmId} id={filmId} />)
                 }
               </FilmsContainer>
             </Fragment>
-
       }
 
     </Fragment>

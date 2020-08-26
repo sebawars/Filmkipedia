@@ -41,7 +41,7 @@ const UserForm = ( {title, buttonTitle, onSubmit} ) => {
       else { 
         setErrForm('')
         setAuth(data.access_token)
-        setTokenStorage(data.access_token)
+        // setTokenStorage(data.access_token)
       }
 
     }

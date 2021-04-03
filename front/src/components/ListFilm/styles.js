@@ -16,10 +16,7 @@ export const Article = styled.article`
   background: #FFFFFF;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.23);
   border-radius: 7px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  display: block;
   overflow: hidden;
   margin-bottom: 1em;
 `
@@ -28,7 +25,8 @@ export const Title = styled.h1`
   text-decoration: strong;
   font-size: 1.5em;
   font-weight: 1000;
-  display: inline;  
+  display: inline;
+  max-width: 270px;
 `
 
 export const Anio = styled.span`
@@ -42,8 +40,9 @@ export const Imagen = styled.img`
 
 export const TitleYear = styled.div`
   display: flex;
+  flex: 1;
   align-items: center;
-  margin: 0.25em 0;
+  padding: 0.25em 0;
   min-height: 4.5em;
   justify-content: center;
 `

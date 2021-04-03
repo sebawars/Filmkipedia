@@ -41,7 +41,7 @@ const ListOfFilms = () => {
           : <Fragment>
               <OptionsContainer>
                 <OrderContainer>
-                  <span>Orden:&nbsp;&nbsp;</span><AiOutlineSortAscending size={ order==='ASC' ? '37px' : '31px' } onClick={() => setOrder('ASC')} />&nbsp;<AiOutlineSortDescending size={ order==='DESC' ? '37px' : '31px' } onClick={() => setOrder('DESC')} />
+                  <span>Ordenar por:&nbsp;&nbsp;</span><AiOutlineSortAscending size={ order==='ASC' ? '37px' : '31px' } onClick={() => setOrder('ASC')} />&nbsp;<AiOutlineSortDescending size={ order==='DESC' ? '37px' : '31px' } onClick={() => setOrder('DESC')} />
                 </OrderContainer>
                 <Select options={selectList} styles={customSelectStyles} placeholder='Página'/>
 

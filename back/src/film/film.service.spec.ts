@@ -77,7 +77,7 @@ describe('FilmService Tests', (): void => {
       .withCast(existingCast1)
       .buildAndPersist();
 
-    const retrievedFilms: Film[] = await filmService.findAll();
+    const [retrievedFilms, count] = await filmService.findAndPaginate(2, 0, null, null);
 
     expect(retrievedFilms).toHaveLength(2);
     expect(retrievedFilms).toContainEqual(existingFilm1);

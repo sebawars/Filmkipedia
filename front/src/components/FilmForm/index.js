@@ -30,7 +30,7 @@ export const FilmForm = ( { filmname, country, release, director, image, cast, o
         </InputContainer>
 
         <ButtonContainer>
-          <button>Guardar</button>
+          <button type='submit' onClick={null}>Guardar</button>
           <button>Eliminar</button>
         </ButtonContainer>
       </FilmEdit>

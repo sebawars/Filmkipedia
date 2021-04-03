@@ -40,7 +40,7 @@ const api = {
       if(res.status !== 200) 
         throw new Error(res.status)
 
-      return res.data
+      return res.data.results
     },
     create(newFilm, token) {
       return callApi('/film', {

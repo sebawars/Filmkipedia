@@ -54,6 +54,7 @@ export const ButtonContainer = styled.div`
 
     button{
         margin: 0 2em;
+        cursor: pointer;
     }
 
 `

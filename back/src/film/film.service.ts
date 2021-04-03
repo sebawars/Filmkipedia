@@ -1,6 +1,6 @@
 import { Injectable, Logger, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { Film } from './film.entity';
 import * as Yup from 'yup';
 
@@ -12,10 +12,18 @@ export class FilmService {
 
   private readonly logger: Logger = new Logger(FilmService.name);
 
-  findAll(order?: string): Promise<Film[]> {
+  async findAndPaginate(take: number, skip: number, order: "ASC" | "DESC" | 1 | -1 = 'DESC', keyword?: string): Promise<[Film[], number]> {
     this.logger.debug(`Retrieving films${order ? ' with order' : ''}`);
     
-    return this.filmRepository.find( order ? { order: {filmname: (order =='ASC') ? 'ASC' : 'DESC'} } : {} );
+    //return this.filmRepository.find( order ? { order: {filmname: (order =='ASC') ? 'ASC' : 'DESC'} } : {} );
+
+    return await this.filmRepository.findAndCount(
+      {
+        //where: { filmname: Like('%' + keyword + '%') }, order: { filmname: order },
+        take: take,
+        skip: skip
+      }
+    );
   }
 
   async save(filmDto: Film): Promise<Film> {

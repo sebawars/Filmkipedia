@@ -4,6 +4,7 @@ import { Film } from './film.entity';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { ApiBearerAuth, ApiOkResponse, ApiConflictResponse, ApiNoContentResponse, ApiCreatedResponse } from '@nestjs/swagger';
 import { FilmDto } from './dto/film.dto';
+import { PageDto } from '../pagination/pageDto';
 
 @Controller('film')
 @UseGuards(JwtAuthGuard)
@@ -13,11 +14,11 @@ export class FilmController {
 
   @Get()
   @ApiOkResponse({ description: 'Retrieved films.'})
-  async list(@Query() query): Promise<Film[]> {
+  async list(@Query() {take = 100, skip = 0, order, keyword = ''}): Promise<PageDto<Film>> {
 
-    const retrievedFilms:Film[] = await this.filmService.findAll(query.order);
+    const [films, totalCount] = await this.filmService.findAndPaginate(take, skip, order, keyword);
 
-    return retrievedFilms;
+    return new PageDto(films, totalCount);
 
   }
 

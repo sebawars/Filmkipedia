@@ -2,7 +2,7 @@
 
 #### Gestión de peliculas.  
 
-  <details open>
+  <details>
 	<summary> Consigna </summary>
 
 <br>Imaginate que te contratan de un videoclub que quiere construir un catálogo web y exponer todas sus películas a través de una API REST. 

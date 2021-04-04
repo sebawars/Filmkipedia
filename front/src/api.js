@@ -20,6 +20,7 @@ async function callApi(endpoint, options = {}) {
   const url = BASE_URL + endpoint
   const res = await fetch(url, options)
   const data = (res.headers.get("Content-Length") !== '0' && await res.json()) || {};
+  console.log('data: '+ JSON.stringify(data))
   const status = res.status;
 
   const response = {
@@ -34,13 +35,21 @@ const authorizationHeader = (token) => { return {'Authorization': 'Bearer ' + to
 
 const api = {
   film: {
-    async list(order, token) {
-      const res = await callApi(`/film${order ? '?order='+order : ''}`, {headers: authorizationHeader(token)})
+    async list(take=process.env.REACT_APP_FILMS_PER_PAGES, skip=0, keyword='', order='DESC', token) {
+      const res = await callApi(`/film?take=${take}&skip=${skip}&keyword=${keyword}&order=${order}}`, {headers: authorizationHeader(token)})
 
       if(res.status !== 200) 
         throw new Error(res.status)
 
       return res.data.results
+    },
+    async findById(id, token) {
+      const res = await callApi(`/film/${id}`, {headers: authorizationHeader(token)})
+
+      if(res.status !== 200) 
+        throw new Error(res.status)
+
+      return res.data
     },
     create(newFilm, token) {
       return callApi('/film', {

@@ -22,24 +22,32 @@ export class FilmController {
 
   }
 
+  @Get(':id')
+  @ApiOkResponse({ description: 'Retrieved film.'})
+  async findById(@Param('id') id: number): Promise<FilmDto> {
+
+    return await (await this.filmService.findById(id)).toFilmDto();
+
+  }
+
   @Post()
   @HttpCode(201)
   @ApiCreatedResponse({ description: 'Film created.'})
   @ApiConflictResponse({ description: 'Film already exists.'})
-  async create(@Body() filmDto: FilmDto): Promise<Film> {
+  async create(@Body() filmDto: FilmDto): Promise<FilmDto> {
 
     const savedFilm: Film = await this.filmService.save(filmDto.toFilm());
 
-    return savedFilm;
+    return savedFilm.toFilmDto();
   }
 
   @Put(':id')
   @ApiOkResponse({ description: 'Film updated.'})
-  async update(@Body() filmDto: FilmDto): Promise<Film> {
+  async update(@Body() filmDto: FilmDto): Promise<FilmDto> {
 
     const savedFilm: Film = await this.filmService.save(filmDto.toFilm());
 
-    return savedFilm;
+    return savedFilm.toFilmDto();
   }
 
   @Delete(':id')

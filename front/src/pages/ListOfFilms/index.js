@@ -19,7 +19,7 @@ const ListOfFilms = () => {
 
   const dispatch = useDispatch();
   
-  const fetchFilms = (id, order, auth) => dispatch(fetchFilmsAction(id, order, auth))
+  const fetchFilms = (take, skip, keyword, order, auth) => dispatch(fetchFilmsAction(take, skip, keyword, order, auth))
 
   const customSelectStyles = {
     control: base => ({
@@ -29,7 +29,7 @@ const ListOfFilms = () => {
   };
 
   useEffect(function () {
-    fetchFilms(null, order, auth)
+    fetchFilms(process.env.REACT_APP_FILMS_PER_PAGES, 0, 0, 'DESC', auth)
   }, [order])
 
 

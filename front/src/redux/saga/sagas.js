@@ -1,4 +1,4 @@
-import { all, call, put, takeEvery, takeLatest } from 'redux-saga/effects'
+import { all, call, put, takeEvery } from 'redux-saga/effects'
 import api from '../../api'
 import { setFetchInfo } from '../actions/set-fetch-info'
 import { setAuth } from '../actions/set-auth'
@@ -8,11 +8,11 @@ import { normalizeFilms } from '../../redux/normalizers'
 
 
 // worker Saga: will be fired on FILM_FETCH_REQUESTED actions
-function* fetchFilms({type, payload:{id, order, auth}}) {
+function* fetchFilms({payload:{take, skip, keyword, order, auth}}) {
    let error = null
    try {
       yield put(setFetchInfo({films:{fetchError: error, fetching: true}}))
-      const data = yield call(api.film.list, order, auth)
+      const data = yield call(api.film.list, take, skip, keyword, order, auth)
       
       const dataNormalizada = normalizeFilms(data)
       const entities = dataNormalizada.entities
@@ -33,6 +33,7 @@ function* fetchFilms({type, payload:{id, order, auth}}) {
       yield put(setFetchInfo({films:{fetchError: error, fetching: false}}))
    }
 }
+
 /*
   Starts fetchFilms on each dispatched `FILM_FETCH_REQUESTED` action.
   Allows concurrent fetches of films.

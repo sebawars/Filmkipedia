@@ -35,6 +35,9 @@ await queryRunner
   }, {
     name: 'Chris',
     surname: 'Columbus'
+  }, {
+    name: 'Chuck',
+    surname: 'Russell'
   }])
   .execute();
 
@@ -179,6 +182,34 @@ await queryRunner
       release: '2007',
       director: 6,
       image: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/z5bL1z1ZOAKBkvbOhVQp6GfBv4u.jpg'
+    },
+    {
+      filmname: 'Harry Potter y el misterio del príncipe',
+      country: 'USA',
+      release: '2009',
+      director: 6,
+      image: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/nSb3nNiL6pOEDK34T0U6RKTGzlJ.jpg'
+    },
+    {
+      filmname: 'Harry Potter y las Reliquias de la Muerte - Parte 1',
+      country: 'USA',
+      release: '2010',
+      director: 6,
+      image: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/fYyoJ4Yadk0MCBHZPFrgvMDl50o.jpg'
+    },
+    {
+      filmname: 'Harry Potter y las Reliquias de la Muerte - Parte 2',
+      country: 'USA',
+      release: '2011',
+      director: 6,
+      image: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/aM1TuUiPtV8OAZyu61CTdy9Ymtk.jpg'
+    },
+    {
+      filmname: 'La máscara',
+      country: 'USA',
+      release: '1994',
+      director: 7,
+      image: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/8SmzepMp7glh5cZRDGsbleZWiZQ.jpg'
     }
   ])
   .execute();

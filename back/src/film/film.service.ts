@@ -26,6 +26,12 @@ export class FilmService {
     );
   }
 
+  async findById(id: number): Promise<Film> {
+    this.logger.debug(`Retrieving film ${id}`);
+    
+    return await this.filmRepository.findOne(id);
+  }
+
   async save(filmDto: Film): Promise<Film> {
     this.logger.debug(`Upserting film`);
 

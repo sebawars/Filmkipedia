@@ -1,24 +1,20 @@
 import React, { Fragment, useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { fetchFilms as fetchFilmsAction } from '../../redux/actions/fetch-films'
+import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from '@reach/router'
-
+import api from '../../api';
 import { Film } from '../../components/Film'
 import { FilmForm } from '../../components/FilmForm'
 import { Loader } from '../../components/Loader'
 import { filmByIdSelector } from '../../redux/selectors/filmSelector'
+import { setFetchInfo } from '../../redux/actions/set-fetch-info';
 
-export const FilmDetails = (props) => {
+export const FilmDetails = ({ filmId }) => {
   const [ filmData, setFilmData ] = useState(null)
   const [ redirect, setRedirect ] = useState(false)
   
   const state = useSelector((state) => state)
   const { fetchInfo, auth, result } = state
-  const filmWithId = filmByIdSelector(props.filmId)(state)
-  
-  const dispatch = useDispatch()
-  
-  const fetchFilms = (id, order, auth) => dispatch(fetchFilmsAction(id, order, auth))
+  const filmWithId = filmByIdSelector(filmId)(state)
 
   const handleChange = e => {
     setFilmData({
@@ -27,14 +23,23 @@ export const FilmDetails = (props) => {
     })
   }
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    if(!result){
-      fetchFilms(null, null, auth)
+
+    async function asyncEffect() {
+      if(filmWithId)
+        setFilmData(filmWithId);
+      else {
+        const fetchedFilm = await api.film.findById(filmId, auth);
+        console.log('fetchedFilm: '+ fetchedFilm)
+        setFilmData(fetchedFilm);
+        dispatch(setFetchInfo({films:{fetchError: null, fetching: false}}))
+      }
     }
-    
-    if(!fetchInfo.films.fetching){
-      setFilmData(filmWithId)  
-    }
+
+    asyncEffect();
+
   }, [fetchInfo.films.fetching])
   
   

@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react'
-import { Article, Title, Imagen, Detalles, Anio, Reparto, SubTitulo } from './styles'
+import React, { Fragment } from 'react';
+import { Article, Title, Imagen, Detalles, Anio, Reparto, SubTitulo } from './styles';
 
 export const Film = ({ filmname, country, release, director, image, cast }) => {
   return (
-    <Article >
+    <Article>
       <Imagen src={image} />
       <Detalles>
         <div>
@@ -11,19 +11,25 @@ export const Film = ({ filmname, country, release, director, image, cast }) => {
           <Anio>({release})</Anio>
         </div>
         <SubTitulo>Origen: {country}</SubTitulo>
-        {director && <SubTitulo>Director: {director.nombre} {director.apellido}</SubTitulo>}
+        {director && (
+          <SubTitulo>
+            Director: {director.nombre} {director.apellido}
+          </SubTitulo>
+        )}
       </Detalles>
-      
-      <Reparto>
 
+      <Reparto>
         <SubTitulo>Reparto:</SubTitulo>
 
         <Fragment>
-          { cast && cast.map(actor => <SubTitulo key={actor.id} >{actor.nombre} {actor.apellido}</SubTitulo>)}
+          {cast &&
+            cast.map((actor) => (
+              <SubTitulo key={actor.id}>
+                {actor.nombre} {actor.apellido}
+              </SubTitulo>
+            ))}
         </Fragment>
-            
       </Reparto>
-
     </Article>
-  )
-}
+  );
+};

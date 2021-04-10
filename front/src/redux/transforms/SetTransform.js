@@ -12,7 +12,7 @@ const SetTransform = createTransform(
     return { ...outboundState };
   },
   // define which reducers this transform gets called for.
-  { whitelist: ['auth'] }
+  { whitelist: ['auth'] },
 );
 
 export default SetTransform;

@@ -6,7 +6,7 @@ export const actor = new schema.Entity('actors');
 
 export const film = new schema.Entity('films', {
   director: director,
-  cast: [actor]
+  cast: [actor],
 });
 
 export const filmListSchema = new schema.Array(film);

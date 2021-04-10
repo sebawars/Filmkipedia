@@ -1,13 +1,13 @@
-import { createStore, applyMiddleware } from 'redux'
-import createSagaMiddleware from 'redux-saga'
-import { persistStore, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 
-import reducer from './reducers'
-import filmsSaga from './saga/sagas'
-import SetTransform from './transforms/SetTransform'
+import reducer from './reducers';
+import filmsSaga from './saga/sagas';
+import SetTransform from './transforms/SetTransform';
 
-const sagaMiddleware = createSagaMiddleware()
+const sagaMiddleware = createSagaMiddleware();
 
 // const store = createStore(reducer, applyMiddleware(sagaMiddleware));
 
@@ -15,16 +15,13 @@ const persistConfig = {
   key: 'root',
   storage,
   whitelist: ['auth'], // only auth will be persisted
-}
+};
 
-const persistedReducer = persistReducer(persistConfig, reducer)
+const persistedReducer = persistReducer(persistConfig, reducer);
 
-let store = createStore(persistedReducer, applyMiddleware(sagaMiddleware))
-let persistor = persistStore(store)
+const store = createStore(persistedReducer, applyMiddleware(sagaMiddleware));
+const persistor = persistStore(store);
 
-sagaMiddleware.run(filmsSaga)
+sagaMiddleware.run(filmsSaga);
 
-export {
-  store, 
-  persistor
-}
+export { store, persistor };

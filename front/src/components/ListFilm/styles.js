@@ -1,25 +1,29 @@
-import styled from 'styled-components'
-
+import styled from 'styled-components';
 
 export const Article = styled.article`
-
-  @media (max-width: 1368px){
-    margin-left: 1em; 
+  @media (max-width: 1368px) {
+    margin-left: 1em;
     margin-right: 1em;
   }
 
-  a{
-      text-decoration: inherit;
-      color: inherit;
+  &:hover {
+    box-shadow: 0 0 15px 10px rgba(0, 0, 0, 0.23);
+    transform: scale(1.08, 1.08);
   }
 
-  background: #FFFFFF;
+  a {
+    text-decoration: inherit;
+    color: inherit;
+  }
+
+  transition: all 0.3s ease-in-out;
+  background: #ffffff;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.23);
   border-radius: 7px;
   display: block;
   overflow: hidden;
   margin-bottom: 1em;
-`
+`;
 
 export const Title = styled.h1`
   text-decoration: strong;
@@ -27,16 +31,16 @@ export const Title = styled.h1`
   font-weight: 1000;
   display: inline;
   max-width: 270px;
-`
+`;
 
 export const Anio = styled.span`
-    font-size: 1.5em;
-    font-weight: 100;
-`
+  font-size: 1.5em;
+  font-weight: 100;
+`;
 
 export const Imagen = styled.img`
   max-width: 300px;
-`
+`;
 
 export const TitleYear = styled.div`
   display: flex;
@@ -45,4 +49,4 @@ export const TitleYear = styled.div`
   padding: 0.25em 0;
   min-height: 4.5em;
   justify-content: center;
-`
+`;

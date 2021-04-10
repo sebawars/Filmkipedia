@@ -17,7 +17,7 @@ export const FilmDetails = ({ filmId }) => {
   const [listableDirectors, setListableDirectors] = useState([]);
 
   const state = useSelector((state) => state);
-  const { fetchInfo, auth, result } = state;
+  const { fetchInfo, auth, result, entities } = state;
   const filmWithId = filmByIdSelector(filmId)(state);
 
   const handleChange = (e) => {
@@ -31,12 +31,15 @@ export const FilmDetails = ({ filmId }) => {
 
   useEffect(() => {
     async function asyncEffect() {
+      // Seteamos loading en Redux
       dispatch(setFetchInfo({ films: { fetchError: null, fetching: true } }));
 
       try {
         if (filmWithId) {
+          // Encontramos la pelicula en el store. No fetcheamos
           setFilmData(filmWithId);
         } else {
+          // No encontramos la pelicula en el store. Fetcheamos
           const fetchedFilm = await api.film.findById(filmId, auth);
           setFilmData(fetchedFilm);
         }
@@ -65,7 +68,7 @@ export const FilmDetails = ({ filmId }) => {
 
   return fetchInfo.films.fetching ? (
     <Loader />
-  ) : !redirect ? (
+  ) : (
     <Fragment>
       <Film {...filmData} key={1} onChange={handleChange}></Film>
       <FilmForm {...filmData} key={2} onChange={handleChange} />
@@ -87,7 +90,5 @@ export const FilmDetails = ({ filmId }) => {
         placeholder='Seleccionar director'
       />
     </Fragment>
-  ) : (
-    <Redirect noThrow to='/films' />
   );
 };

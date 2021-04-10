@@ -1,9 +1,15 @@
-import { Entity, Column, PrimaryGeneratedColumn, JoinTable, ManyToMany, OneToMany, ManyToOne } from 'typeorm';
-import { Actor } from '../actor/actor.entity';
-import { Director } from '../director/director.entity';
-import { FilmDto } from './dto/film.dto';
-import { Exclude } from 'class-transformer';
-import { ApiHideProperty } from '@nestjs/swagger';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  ManyToOne,
+} from "typeorm";
+import { Actor } from "../actor/actor.entity";
+import { Director } from "../director/director.entity";
+import { FilmDto } from "./dto/film.dto";
 
 @Entity()
 export class Film {
@@ -15,12 +21,15 @@ export class Film {
   country: string;
   @Column()
   release: number;
-  @ManyToOne(type => Director, { eager: true, cascade: true })
+  @ManyToOne((type) => Director, { eager: true, cascade: true })
   director: Director;
   @Column()
   image: string;
-  @ManyToMany(type => Actor, actor => actor.films, { eager: true, cascade: true })
-  @JoinTable({ name: 'film_actor' })
+  @ManyToMany((type) => Actor, (actor) => actor.films, {
+    eager: true,
+    cascade: true,
+  })
+  @JoinTable({ name: "film_actor" })
   cast: Actor[];
 
   toFilmDto(): FilmDto {
@@ -33,5 +42,4 @@ export class Film {
     filmDto.cast = this.cast;
     return filmDto;
   }
-
 }

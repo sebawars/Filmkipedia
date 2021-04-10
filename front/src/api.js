@@ -74,7 +74,6 @@ const api = {
   actor: {
     async list(token) {
       const res = await callApi('/actor', { headers: authorizationHeader(token) });
-
       if (res.status !== 200) throw new Error(res.status);
 
       return res.data;

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Link as LinkRouter } from '@reach/router';
 
 export const Nav = styled.nav`
@@ -36,4 +36,23 @@ export const Title = styled.h1`
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
     'Helvetica Neue', sans-serif;
   color: #90a4ae;
+  &:hover {
+    transform: scale(1.08, 1.08);
+  }
+  transition: all 0.3s ease-in-out;
+`;
+
+const scale = keyframes`
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.3);
+  }
+`;
+
+export const PopCornIcon = styled.img`
+  animation: ${scale} 1s linear infinite;
+  animation-direction: alternate;
+  max-height: 45px;
 `;

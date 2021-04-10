@@ -44,17 +44,31 @@ export const FilmDetails = ({ filmId }) => {
           setFilmData(fetchedFilm);
         }
 
-        const fetchedActors = await api.actor.list(auth);
+        // const fetchedActors = await api.actor.list(auth);
+        // const listableActors = fetchedActors.map((actor) => ({
+        //   name: `${actor.name} ${actor.surname}`,
+        //   value: actor.id,
+        // }));
+        // setListableActors(listableActors);
+        // const fetchedDirectors = await api.director.list(auth);
+        // const listableDirectors = fetchedDirectors.map((director) => ({
+        //   name: `${director.name} ${director.surname}`,
+        //   value: director.id,
+        // }));
+        // setListableDirectors(listableDirectors);
+
+        const [fetchedActors, fetchedDirectors] = await Promise.all([api.actor.list(auth), api.director.list(auth)]);
+
         const listableActors = fetchedActors.map((actor) => ({
           name: `${actor.name} ${actor.surname}`,
           value: actor.id,
         }));
-        setListableActors(listableActors);
-        const fetchedDirectors = await api.director.list(auth);
+
         const listableDirectors = fetchedDirectors.map((director) => ({
           name: `${director.name} ${director.surname}`,
           value: director.id,
         }));
+        setListableActors(listableActors);
         setListableDirectors(listableDirectors);
 
         dispatch(setFetchInfo({ films: { fetchError: null, fetching: false } }));

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import Select from 'react-select';
 import { AiOutlineSortDescending, AiOutlineSortAscending } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -51,7 +50,6 @@ const ListOfFilms = () => {
               &nbsp;
               <AiOutlineSortDescending size={order === 'DESC' ? '37px' : '31px'} onClick={() => setOrder('DESC')} />
             </OrderContainer>
-            <Select options={selectList} styles={customSelectStyles} placeholder='Página' />
           </OptionsContainer>
 
           <FilmsContainer>{filmIds && filmIds.map((filmId) => <ListFilm key={filmId} id={filmId} />)}</FilmsContainer>

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { FilmEdit, ButtonContainer, InputContainer } from './styles';
 
-export const FilmForm = ({ filmname, country, release, director, image, cast, onChange }) => {
+export const FilmForm = ({ filmname, country, release, onChange }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
   };

@@ -7,16 +7,16 @@ import { setResult } from '../actions/set-result';
 import { normalizeFilms } from '../../redux/normalizers';
 
 // worker Saga: will be fired on FILM_FETCH_REQUESTED actions
-function* fetchFilms({ payload: { take, skip, keyword, order, auth } }) {
+function* fetchFilms({ payload: { skip, keyword, order, auth } }) {
   let error = null;
   try {
     yield put(setFetchInfo({ films: { fetchError: error, fetching: true } }));
-    const data = yield call(api.film.list, take, skip, keyword, order, auth);
+    const data = yield call(api.film.list, skip, keyword, order, auth);
 
     const dataNormalizada = normalizeFilms(data);
     const entities = dataNormalizada.entities;
     const result = dataNormalizada.result;
-
+    console.log(entities);
     yield all([put(setEntities(entities)), put(setResult(result))]);
   } catch (e) {
     // TODO

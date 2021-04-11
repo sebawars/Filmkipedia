@@ -6,6 +6,7 @@ export const FilmsContainer = styled.ul`
   justify-content: space-evenly;
   display: flex;
   flex-wrap: wrap;
+  flex: 1;
 `;
 
 export const OptionsContainer = styled.div`
@@ -15,7 +16,6 @@ export const OptionsContainer = styled.div`
   align-items: center;
   display: flex;
   justify-content: space-between;
-  margin-top: 2em;
 `;
 
 export const OrderContainer = styled.div`

@@ -5,7 +5,6 @@ import storage from 'redux-persist/lib/storage'; // defaults to localStorage for
 
 import reducer from './reducers';
 import filmsSaga from './saga/sagas';
-import SetTransform from './transforms/SetTransform';
 
 const sagaMiddleware = createSagaMiddleware();
 

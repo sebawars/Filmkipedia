@@ -15,3 +15,7 @@ export const Error = styled.span`
   color: red;
   font-size: 14px;
 `;
+
+export const LoginButton = styled.button`
+  cursor: pointer;
+`;

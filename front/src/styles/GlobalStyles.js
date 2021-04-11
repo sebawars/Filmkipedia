@@ -32,6 +32,9 @@ export const GlobalStyles = createGlobalStyle`
     overscroll-behavior: none;
     max-width: 70%;
     background-color: #f4f4f7;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
 
     @media (max-width: 1385px){
       max-width: 85%;
@@ -72,19 +75,17 @@ export const GlobalStyles = createGlobalStyle`
     box-shadow: 0 0 10px rgba(0, 0, 0, .05);
     overflow-x: hidden;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
   }
 `;
 
 export const Main = styled.main`
-  min-height: calc(100vh - 60px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding-top: 2em;
   width: 100%;
-  margin-top: 4em;
-
-  #mainRouter {
-    width: inherit;
-    text-align: center;
-  }
+  margin-top: 60px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 `;

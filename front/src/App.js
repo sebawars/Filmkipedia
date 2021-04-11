@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Router, Redirect } from '@reach/router';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { GlobalStyles, Main } from './styles/GlobalStyles';
 import ListOfFilms from './pages/ListOfFilms';
 import NavBar from './components/NavBar';
@@ -13,19 +13,27 @@ const App = () => {
   return (
     <Fragment>
       <GlobalStyles />
-      <NavBar />
-      <Main>
-        {
-          <Router id='mainRouter'>
-            {!auth && <LoginPage path='/' />}
-            {!auth && <Redirect noThrow from='/*' to='/' />}
+      {
+        <BrowserRouter id='mainBrowserRouter'>
+          <>
+            <NavBar />
+            <Main>
+              <Switch>
+                {!auth && <Route path='/' component={LoginPage} />}
+                {!auth && <Route noThrow from='/*' to='/' />}
 
-            {auth && <ListOfFilms path='/film' />}
-            {auth && <FilmDetails path='/film/:filmId' />}
-            {auth && <Redirect noThrow from='/*' to='/film' />}
-          </Router>
-        }
-      </Main>
+                {auth && <Route path='/films/:filmId' component={FilmDetails} />}
+                {auth && <Route path='/films' component={ListOfFilms} />}
+                {auth && (
+                  <Route path='/*'>
+                    <Redirect to='/films' />
+                  </Route>
+                )}
+              </Switch>
+            </Main>
+          </>
+        </BrowserRouter>
+      }
     </Fragment>
   );
 };

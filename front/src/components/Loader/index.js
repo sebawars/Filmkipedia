@@ -1,18 +1,12 @@
 import React from 'react';
 import { LoaderCont } from './styles';
+import { PopCornIcon } from './styles';
+import logo from '../../assets/popcorn.svg';
 
 export const Loader = () => {
   return (
     <LoaderCont>
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
+      <PopCornIcon src={logo} alt='Logo' />
     </LoaderCont>
   );
 };

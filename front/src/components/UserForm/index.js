@@ -1,11 +1,10 @@
 import React, { useState, Fragment } from 'react';
 import { useInputValue } from '../../hooks/useInputValue';
-import { Error, Form, Title } from './styles';
+import { Error, Form, Title, LoginButton } from './styles';
 import { useDispatch } from 'react-redux';
 import { setAuth as setAuthAction } from '../../redux/actions/set-auth';
-import { setTokenStorage } from '../../util/storage';
 
-const UserForm = ({ title, buttonTitle, onSubmit }) => {
+const UserForm = ({ title, buttonTitle, onSubmit, fetching }) => {
   const email = useInputValue('');
   const password = useInputValue('');
   const [errForm, setErrForm] = useState('');
@@ -38,7 +37,6 @@ const UserForm = ({ title, buttonTitle, onSubmit }) => {
       else {
         setErrForm('');
         setAuth(data.access_token);
-        // setTokenStorage(data.access_token)
       }
     }
   }
@@ -49,7 +47,7 @@ const UserForm = ({ title, buttonTitle, onSubmit }) => {
         <Title>{title}</Title>
         <input placeholder='Email' {...email} />
         <input placeholder='Password' type='password' {...password} />
-        <button> {buttonTitle} </button>
+        <LoginButton disabled={fetching}> {buttonTitle} </LoginButton>
         <br></br>
         {errForm && <Error>{errForm}</Error>}
       </Form>

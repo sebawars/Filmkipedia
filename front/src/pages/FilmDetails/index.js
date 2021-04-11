@@ -1,6 +1,5 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from '@reach/router';
 import api from '../../api';
 import { Film } from '../../components/Film';
 import { FilmForm } from '../../components/FilmForm';
@@ -10,14 +9,14 @@ import { setFetchInfo } from '../../redux/actions/set-fetch-info';
 import SelectSearch, { fuzzySearch } from 'react-select-search';
 import 'react-select-search/style.css';
 
-export const FilmDetails = ({ filmId }) => {
+export const FilmDetails = (props) => {
   const [filmData, setFilmData] = useState(null);
-  const [redirect, setRedirect] = useState(false);
   const [listableActors, setListableActors] = useState([]);
   const [listableDirectors, setListableDirectors] = useState([]);
 
   const state = useSelector((state) => state);
-  const { fetchInfo, auth, result, entities } = state;
+  const { fetchInfo, auth } = state;
+  const filmId = props.match.params.filmId;
   const filmWithId = filmByIdSelector(filmId)(state);
 
   const handleChange = (e) => {
@@ -43,19 +42,6 @@ export const FilmDetails = ({ filmId }) => {
           const fetchedFilm = await api.film.findById(filmId, auth);
           setFilmData(fetchedFilm);
         }
-
-        // const fetchedActors = await api.actor.list(auth);
-        // const listableActors = fetchedActors.map((actor) => ({
-        //   name: `${actor.name} ${actor.surname}`,
-        //   value: actor.id,
-        // }));
-        // setListableActors(listableActors);
-        // const fetchedDirectors = await api.director.list(auth);
-        // const listableDirectors = fetchedDirectors.map((director) => ({
-        //   name: `${director.name} ${director.surname}`,
-        //   value: director.id,
-        // }));
-        // setListableDirectors(listableDirectors);
 
         const [fetchedActors, fetchedDirectors] = await Promise.all([api.actor.list(auth), api.director.list(auth)]);
 
@@ -83,7 +69,7 @@ export const FilmDetails = ({ filmId }) => {
   return fetchInfo.films.fetching ? (
     <Loader />
   ) : (
-    <Fragment>
+    <>
       <Film {...filmData} key={1} onChange={handleChange}></Film>
       <FilmForm {...filmData} key={2} onChange={handleChange} />
       <SelectSearch
@@ -103,6 +89,6 @@ export const FilmDetails = ({ filmId }) => {
         filterOptions={fuzzySearch}
         placeholder='Seleccionar director'
       />
-    </Fragment>
+    </>
   );
 };

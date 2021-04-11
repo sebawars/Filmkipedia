@@ -34,10 +34,13 @@ const authorizationHeader = (token) => {
 
 const api = {
   film: {
-    async list(take = process.env.REACT_APP_FILMS_PER_PAGES, skip = 0, keyword = '', order = 'DESC', token) {
-      const res = await callApi(`/film?take=${take}&skip=${skip}&keyword=${keyword}&order=${order}}`, {
-        headers: authorizationHeader(token),
-      });
+    async list(skip = 10, keyword = '', order = 'DESC', token) {
+      const res = await callApi(
+        `/film?take=${process.env.REACT_APP_FILMS_PER_PAGES}&skip=${skip}&keyword=${keyword}&order=${order}`,
+        {
+          headers: authorizationHeader(token),
+        },
+      );
 
       if (res.status !== 200) throw new Error(res.status);
 

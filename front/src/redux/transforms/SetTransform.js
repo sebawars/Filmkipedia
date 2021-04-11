@@ -2,12 +2,12 @@ import { createTransform } from 'redux-persist';
 
 const SetTransform = createTransform(
   // transform state on its way to being serialized and persisted.
-  (inboundState, key) => {
+  (inboundState) => {
     // convert mySet to an Array.
     return { ...inboundState };
   },
   // transform state being rehydrated
-  (outboundState, key) => {
+  (outboundState) => {
     // convert mySet back to a Set.
     return { ...outboundState };
   },

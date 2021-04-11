@@ -1,11 +1,9 @@
 import React from 'react';
-import { Link, Nav, Title, PopCornIcon } from './styles';
-import { FcFilmReel } from 'react-icons/fc';
+import { Link, Nav, Title, LensIcon } from './styles';
 import { FiPower } from 'react-icons/fi';
 import { useSelector, useDispatch } from 'react-redux';
 import { setAuth as setAuthAction } from '../../redux/actions/set-auth';
-import { removeTokenStorage } from '../../util/storage';
-import logo from '../../assets/popcorn.svg';
+import logo from '../../assets/lens.svg';
 
 const NavBar = () => {
   // Redux
@@ -21,10 +19,7 @@ const NavBar = () => {
   return (
     <Nav>
       <Link to='/'>
-        {/* <IconContainer>
-          <FcFilmReel size='35px' />
-        </IconContainer> */}
-        <PopCornIcon src={logo} alt='Logo' />
+        <LensIcon src={logo} alt='Logo' />
         <Title>VideoClub</Title>
       </Link>
       {auth && (

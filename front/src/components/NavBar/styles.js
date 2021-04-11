@@ -1,10 +1,9 @@
 import styled, { keyframes } from 'styled-components';
-import { Link as LinkRouter } from '@reach/router';
+import { Link as LinkRouter } from 'react-router-dom';
 
 export const Nav = styled.nav`
   align-items: center;
   background: #fcfcfc;
-  border-bottom: 1px solid #e0e0e0;
   top: 0;
   left: 0;
   right: 0;
@@ -43,16 +42,16 @@ export const Title = styled.h1`
 `;
 
 const scale = keyframes`
-  from {
-    transform: scale(1);
+  0%,50% {
+    transform: scaleX(-1);
   }
-  to {
-    transform: scale(1.3);
+  51%,100% {
+    transform: scaleX(1);
   }
 `;
 
-export const PopCornIcon = styled.img`
-  animation: ${scale} 1s linear infinite;
+export const LensIcon = styled.img`
+  // animation: ${scale} 1s linear infinite;
   animation-direction: alternate;
   max-height: 45px;
 `;

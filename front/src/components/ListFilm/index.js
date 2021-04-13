@@ -15,14 +15,16 @@ export const ListFilm = ({ id }) => {
   };
 
   return (
-    <Article>
-      <Link to={`/films/${film.id}`} state={film} style={linkStyle}>
-        <Imagen src={film.image} />
+    film && (
+      <Article>
+        <Link to={`/films/${film.id}`} state={film} style={linkStyle}>
+          <Imagen src={film.image} />
 
-        <TitleYear>
-          <Title>{film.filmname + ` (${film.release})`}</Title>
-        </TitleYear>
-      </Link>
-    </Article>
+          <TitleYear>
+            <Title>{film.filmname + ` (${film.release})`}</Title>
+          </TitleYear>
+        </Link>
+      </Article>
+    )
   );
 };

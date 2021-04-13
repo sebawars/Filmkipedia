@@ -7,7 +7,7 @@ import { Loader } from '../../components/Loader';
 import { filmByIdSelector } from '../../redux/selectors/filmSelector';
 import { setFetchInfo } from '../../redux/actions/set-fetch-info';
 import SelectSearch, { fuzzySearch } from 'react-select-search';
-import 'react-select-search/style.css';
+import './styles.css';
 
 export const FilmDetails = (props) => {
   const [filmData, setFilmData] = useState(null);
@@ -76,6 +76,7 @@ export const FilmDetails = (props) => {
         options={listableActors}
         multiple
         search
+        closeOnSelect={false}
         //onChange={(valores) => alert(valores[0])}
         printOptions='on-focus'
         filterOptions={fuzzySearch}

@@ -14,6 +14,7 @@ function* fetchFilms({ type, payload: { skip, keyword, order, auth } }) {
   let error = null;
   try {
     yield put(setFetchInfo({ films: { fetchError: error, fetching: true } }));
+    if (type === SET_FILMS_ACTION) yield put(setResult([]));
     const data = yield call(api.film.list, skip, keyword, order, auth);
 
     const dataNormalizada = normalizeFilms(data);

@@ -70,7 +70,7 @@ const ListOfFilms = ({ history }) => {
           </FilmsContainer>
         )}
         {fetchInfo.films.fetching && <Loader />}
-        <button onClick={() => addFollowingPage()}>Mostrar mas</button>
+        {filmIds.length > 0 && <button onClick={() => addFollowingPage()}>Mostrar mas</button>}
       </>
     </Fragment>
   );

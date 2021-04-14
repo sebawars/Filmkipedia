@@ -3,10 +3,12 @@ import auth from './auth';
 import entities from './entities';
 import result from './result';
 import fetchInfo from './fetch-info';
+import filmFilters from './film-filters';
 
 export default combineReducers({
   auth,
   entities,
   result,
   fetchInfo,
+  filmFilters,
 });

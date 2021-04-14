@@ -4,7 +4,7 @@ import { Error, Form, Title, LoginButton } from './styles';
 import { useDispatch } from 'react-redux';
 import { setAuth as setAuthAction } from '../../redux/actions/set-auth';
 
-const UserForm = ({ title, buttonTitle, onSubmit, fetching }) => {
+const FilmSearch = ({ title, buttonTitle, onSubmit, fetching }) => {
   const email = useInputValue('');
   const password = useInputValue('');
   const [errForm, setErrForm] = useState('');
@@ -55,4 +55,4 @@ const UserForm = ({ title, buttonTitle, onSubmit, fetching }) => {
   );
 };
 
-export default UserForm;
+export default FilmSearch;

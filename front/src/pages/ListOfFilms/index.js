@@ -1,23 +1,35 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { AiOutlineSortDescending, AiOutlineSortAscending } from 'react-icons/ai';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useStore } from 'react-redux';
 import { FilmsContainer, OptionsContainer, OrderContainer } from './styles';
 import { Loader } from '../../components/Loader';
 import { ListFilm } from '../../components/ListFilm';
+import { FilmSearch } from '../../components/FilmSearch';
 import { addFilms as addFilmsAction } from '../../redux/actions/add-films';
 import { setFilms as setFilmsAction } from '../../redux/actions/set-films';
+import { setFilmSearch as setFilmSearchAction } from '../../redux/actions/set-film-search';
+import { setFilmOrder as setFilmOrderAction } from '../../redux/actions/set-film-order';
 
 const ListOfFilms = ({ history }) => {
-  const paramOrder = new URLSearchParams(history.location.search).get('order') || '';
-  const [order, setOrder] = useState(paramOrder);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [keywordToSearch, setKeywordToSearch] = useState('');
-  // Redux
-  const { fetchInfo, auth, result } = useSelector((state) => state);
-  const filmIds = result;
+  const setOrder = (newOrder) => dispatch(setFilmOrderAction(newOrder));
+  const setKeyword = (newKeyword) => dispatch(setFilmSearchAction(newKeyword));
+
   const dispatch = useDispatch();
-  const setFilms = (newPage) => dispatch(setFilmsAction(newPage, keywordToSearch, order, auth));
-  const addFilms = (newPage) => dispatch(addFilmsAction(newPage, keywordToSearch, order, auth));
+  const orderParam = new URLSearchParams(history.location.search).get('order') || '';
+  const keywordParam = new URLSearchParams(history.location.search).get('keyword') || '';
+  setOrder(orderParam);
+  setKeyword(keywordParam);
+
+  const [currentPage, setCurrentPage] = useState(0);
+
+  // Redux
+  const { fetchInfo, auth, result, filmFilters } = useStore().getState();
+  const { keyword, order } = filmFilters;
+  const filmIds = result;
+
+  const setFilms = (newPage) => dispatch(setFilmsAction(newPage, keyword, order, auth));
+  const addFilms = (newPage) => dispatch(addFilmsAction(newPage, keyword, order, auth));
+
   const addFollowingPage = () => {
     const nuevaPagina = currentPage + 1;
     setCurrentPage(nuevaPagina);
@@ -27,14 +39,14 @@ const ListOfFilms = ({ history }) => {
   const toggleQueryOrder = (newOrder) => {
     setCurrentPage(0);
     if (order === newOrder) {
-      history.replace({ path: location.origin + location.pathname + `?order=${newOrder}`, search: null });
+      history.replace({ path: location.origin + location.pathname + `?order=${newOrder}`, search: keyword });
       setOrder('');
     } else {
       history.replace({
         path: location.origin + location.pathname + `?order=${newOrder}`,
-        search: `?order=${newOrder}`,
+        search: `?order=${newOrder}` + keyword && `&keyword=${keyword}`,
       });
-      setOrder(newOrder);
+      dispatch(setFilmSearchAction(newOrder));
     }
   };
 
@@ -60,6 +72,7 @@ const ListOfFilms = ({ history }) => {
               onClick={() => !fetchInfo.films.fetching && toggleQueryOrder('DESC')}
             />
           </OrderContainer>
+          <FilmSearch />
         </OptionsContainer>
 
         {filmIds.length > 0 && (

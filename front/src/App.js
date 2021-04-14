@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import 'antd/dist/antd.css';
 import { GlobalStyles, Main } from './styles/GlobalStyles';
 import ListOfFilms from './pages/ListOfFilms';
 import NavBar from './components/NavBar';

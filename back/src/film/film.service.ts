@@ -3,6 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Like, Repository } from "typeorm";
 import { Film } from "./film.entity";
 import * as Yup from "yup";
+import { KeyObject } from "crypto";
 
 @Injectable()
 export class FilmService {
@@ -22,14 +23,17 @@ export class FilmService {
       `Retrieving films${order ? ` with order: ${order}` : ""}`
     );
 
-    console.log("take: ", take);
-    console.log("skip: ", skip);
-    console.log("order: ", order);
-    return await this.filmRepository.findAndCount({
-      //where: { filmname: Like('%' + keyword + '%') },
-      order: { filmname: order },
+    let filtros = {
       take: take,
       skip: skip,
+    };
+
+    if (order) filtros["order"] = { filmname: order };
+
+    if (keyword) filtros["where"] = { filmname: Like("%" + keyword + "%") };
+
+    return await this.filmRepository.findAndCount({
+      ...filtros,
     });
   }
 

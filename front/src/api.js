@@ -34,10 +34,10 @@ const authorizationHeader = (token) => {
 
 const api = {
   film: {
-    async list(skip = 10, keyword = '', order = 'DESC', token) {
+    async list(skip = 10, search = '', order = 'DESC', token) {
       let optionalFilters = '';
-      if (keyword && keyword.length() > 0) optionalFilters += `&keyword=${keyword}`;
-      if (order && order.length() > 0) optionalFilters += `&order=${order}`;
+      if (search && search.length > 0) optionalFilters += `&search=${search}`;
+      if (order && order.length > 0) optionalFilters += `&order=${order}`;
 
       const res = await callApi(`/film?take=${process.env.REACT_APP_FILMS_PER_PAGES}&skip=${skip}${optionalFilters}`, {
         headers: authorizationHeader(token),
@@ -45,7 +45,7 @@ const api = {
 
       if (res.status !== 200) throw new Error(res.status);
 
-      return res.data.results;
+      return res.data;
     },
     async findById(id, token) {
       const res = await callApi(`/film/${id}`, { headers: authorizationHeader(token) });

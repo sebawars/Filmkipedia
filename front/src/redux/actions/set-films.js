@@ -1,11 +1,11 @@
 export const SET_FILMS = 'SET_FILMS';
 
-export const setFilms = (skip, keyword, order, auth) => {
+export const setFilms = (skip, search, order, auth) => {
   return {
     type: SET_FILMS,
     payload: {
       skip,
-      keyword,
+      search,
       order,
       auth,
     },

@@ -3,29 +3,30 @@ import api from '../../api';
 import { setFetchInfo } from '../actions/set-fetch-info';
 import { setAuth } from '../actions/set-auth';
 import { addEntities } from '../actions/add-entities';
-import { addResult } from '../actions/add-result';
+import { addFilmsIds } from '../actions/add-films-ids';
 import { setEntities } from '../actions/set-entities';
-import { setResult } from '../actions/set-result';
+import { setFilmsIds } from '../actions/set-films-ids';
 import { normalizeFilms } from '../../redux/normalizers';
 import { ADD_FILMS as ADD_FILMS_ACTION } from '../actions/add-films';
 import { SET_FILMS as SET_FILMS_ACTION } from '../actions/set-films';
 
-function* fetchFilms({ type, payload: { skip, keyword, order, auth } }) {
+function* fetchFilms({ type, payload: { skip, search, order, auth } }) {
   let error = null;
   try {
     yield put(setFetchInfo({ films: { fetchError: error, fetching: true } }));
-    if (type === SET_FILMS_ACTION) yield put(setResult([]));
-    const data = yield call(api.film.list, skip, keyword, order, auth);
+    if (type === SET_FILMS_ACTION) yield put(setFilmsIds([], 0));
+    const data = yield call(api.film.list, skip, search, order, auth);
 
-    const dataNormalizada = normalizeFilms(data);
+    const dataNormalizada = normalizeFilms(data.results);
     const entities = dataNormalizada.entities;
     const result = dataNormalizada.result;
+
     switch (type) {
       case ADD_FILMS_ACTION:
-        yield all([put(addEntities(entities)), put(addResult(result))]);
+        yield all([put(addEntities(entities)), put(addFilmsIds(result, data.totalCount))]);
         break;
       case SET_FILMS_ACTION:
-        yield all([put(setEntities(entities)), put(setResult(result))]);
+        yield all([put(setEntities(entities)), put(setFilmsIds(result, data.totalCount))]);
         break;
       default:
         break;

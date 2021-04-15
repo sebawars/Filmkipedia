@@ -1,7 +1,4 @@
 import { createSelector } from 'reselect';
-import { denormalizeFilms } from '../normalizers';
-
-export const resultSelector = (state) => state.result;
 export const entitiesSelector = (state) => state.entities;
 
 export const filmByIdSelector = (id) =>
@@ -17,10 +14,3 @@ export const filmByIdSelector = (id) =>
     partialFilm.cast = partialFilm.cast.map((actor) => entities.actors[actor]);
     return partialFilm;
   });
-
-export const filmListSelector = createSelector(entitiesSelector, resultSelector, (entities, result) => {
-  if (!result || !entities) return [];
-
-  const denorm = denormalizeFilms({ entities: entities, result: result });
-  return denorm;
-});

@@ -1,58 +1,79 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useEffect, Fragment, useState } from 'react';
 import { AiOutlineSortDescending, AiOutlineSortAscending } from 'react-icons/ai';
-import { useDispatch, useStore } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FilmsContainer, OptionsContainer, OrderContainer } from './styles';
 import { Loader } from '../../components/Loader';
 import { ListFilm } from '../../components/ListFilm';
 import { FilmSearch } from '../../components/FilmSearch';
 import { addFilms as addFilmsAction } from '../../redux/actions/add-films';
 import { setFilms as setFilmsAction } from '../../redux/actions/set-films';
-import { setFilmSearch as setFilmSearchAction } from '../../redux/actions/set-film-search';
-import { setFilmOrder as setFilmOrderAction } from '../../redux/actions/set-film-order';
+import qs from 'query-string';
 
 const ListOfFilms = ({ history }) => {
-  const setOrder = (newOrder) => dispatch(setFilmOrderAction(newOrder));
-  const setKeyword = (newKeyword) => dispatch(setFilmSearchAction(newKeyword));
+  // Redux
+  const { fetchInfo, auth, entitiesIds } = useSelector((state) => state);
+  const filmIds = entitiesIds.films.ids;
+  const totalCount = entitiesIds.films.totalCount;
+
+  // SET INICIAL DE SEARCH DESDE QUERY PARAM
+  const [search, setSearch] = useState(new URLSearchParams(history.location.search).get('search') || '');
+
+  // SET INICIAL DE ORDER DESDE QUERY PARAM
+  const queryOrder = (new URLSearchParams(history.location.search).get('order') || '').toUpperCase();
+  const orderValues = ['ASC', 'DESC'];
+  const queryOrderOrDefault = orderValues.find((orderValue) => orderValue === queryOrder) || '';
+  const [order, setOrder] = useState(queryOrderOrDefault);
+
+  // SET INICIAL DE PAGE DESDE QUERY PARAM
+  let queryPage = new URLSearchParams(history.location.search).get('page');
+  if (isNaN(queryPage) || queryPage < 0) queryPage = 1;
+  const [page, setPage] = useState(queryPage || 1);
 
   const dispatch = useDispatch();
-  const orderParam = new URLSearchParams(history.location.search).get('order') || '';
-  const keywordParam = new URLSearchParams(history.location.search).get('keyword') || '';
-  setOrder(orderParam);
-  setKeyword(keywordParam);
 
-  const [currentPage, setCurrentPage] = useState(0);
+  const filmsPerPage = parseInt(process.env.REACT_APP_FILMS_PER_PAGES);
 
-  // Redux
-  const { fetchInfo, auth, result, filmFilters } = useStore().getState();
-  const { keyword, order } = filmFilters;
-  const filmIds = result;
+  const setFilms = () => dispatch(setFilmsAction((page - 1) * filmsPerPage, search, order, auth));
+  const addFilms = (newPage) => dispatch(addFilmsAction((newPage - 1) * filmsPerPage, search, order, auth));
 
-  const setFilms = (newPage) => dispatch(setFilmsAction(newPage, keyword, order, auth));
-  const addFilms = (newPage) => dispatch(addFilmsAction(newPage, keyword, order, auth));
+  const updateQueryParamsFromState = () => {
+    const newQueries = {};
+    if (search) newQueries.search = search;
+    if (order) newQueries.order = order;
+    if (page) newQueries.page = page;
+
+    history.push({ search: qs.stringify(newQueries) });
+  };
 
   const addFollowingPage = () => {
-    const nuevaPagina = currentPage + 1;
-    setCurrentPage(nuevaPagina);
-    addFilms(nuevaPagina);
+    const newPage = page + 1;
+    setPage(newPage);
+    addFilms(newPage);
   };
 
   const toggleQueryOrder = (newOrder) => {
-    setCurrentPage(0);
+    setPage(0);
     if (order === newOrder) {
-      history.replace({ path: location.origin + location.pathname + `?order=${newOrder}`, search: keyword });
+      history.replace({ path: location.origin + location.pathname + `?order=${newOrder}`, search: search });
       setOrder('');
     } else {
       history.replace({
         path: location.origin + location.pathname + `?order=${newOrder}`,
-        search: `?order=${newOrder}` + keyword && `&keyword=${keyword}`,
+        search: `?order=${newOrder}` + search && `&search=${search}`,
       });
-      dispatch(setFilmSearchAction(newOrder));
+      setOrder(newOrder);
     }
   };
 
+  const availablePages = filmIds.length < totalCount;
+
   useEffect(() => {
-    setFilms(currentPage);
-  }, [order]);
+    setFilms();
+  }, [order, search]);
+
+  useEffect(() => {
+    updateQueryParamsFromState();
+  }, [order, search, page]);
 
   return (
     <Fragment>
@@ -72,7 +93,7 @@ const ListOfFilms = ({ history }) => {
               onClick={() => !fetchInfo.films.fetching && toggleQueryOrder('DESC')}
             />
           </OrderContainer>
-          <FilmSearch />
+          <FilmSearch setSearch={setSearch} search={search} />
         </OptionsContainer>
 
         {filmIds.length > 0 && (
@@ -83,7 +104,7 @@ const ListOfFilms = ({ history }) => {
           </FilmsContainer>
         )}
         {fetchInfo.films.fetching && <Loader />}
-        {filmIds.length > 0 && <button onClick={() => addFollowingPage()}>Mostrar mas</button>}
+        {filmIds.length > 0 && availablePages && <button onClick={() => addFollowingPage()}>Mostrar mas</button>}
       </>
     </Fragment>
   );

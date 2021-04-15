@@ -1,14 +1,12 @@
 import { combineReducers } from 'redux';
 import auth from './auth';
 import entities from './entities';
-import result from './result';
+import entitiesIds from './entitiesIds';
 import fetchInfo from './fetch-info';
-import filmFilters from './film-filters';
 
 export default combineReducers({
   auth,
   entities,
-  result,
+  entitiesIds,
   fetchInfo,
-  filmFilters,
 });

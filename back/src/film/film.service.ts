@@ -17,7 +17,7 @@ export class FilmService {
     take: number,
     skip: number,
     order: "ASC" | "DESC" | 1 | -1 = "DESC",
-    keyword?: string
+    search?: string
   ): Promise<[Film[], number]> {
     this.logger.debug(
       `Retrieving films${order ? ` with order: ${order}` : ""}`
@@ -30,7 +30,7 @@ export class FilmService {
 
     if (order) filtros["order"] = { filmname: order };
 
-    if (keyword) filtros["where"] = { filmname: Like("%" + keyword + "%") };
+    if (search) filtros["where"] = { filmname: Like("%" + search + "%") };
 
     return await this.filmRepository.findAndCount({
       ...filtros,

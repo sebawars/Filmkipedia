@@ -73,7 +73,6 @@ export const GlobalStyles = createGlobalStyle`
 
   #app {
     box-shadow: 0 0 10px rgba(0, 0, 0, .05);
-    overflow-x: hidden;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -88,4 +87,5 @@ export const Main = styled.main`
   display: flex;
   flex: 1;
   flex-direction: column;
+  height: initial;
 `;

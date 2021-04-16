@@ -77,7 +77,6 @@ export const FilmDetails = (props) => {
         multiple
         search
         closeOnSelect={false}
-        //onChange={(valores) => alert(valores[0])}
         printOptions='on-focus'
         filterOptions={fuzzySearch}
         placeholder='Agregar actores'
@@ -85,7 +84,6 @@ export const FilmDetails = (props) => {
       <SelectSearch
         options={listableDirectors}
         search
-        //onChange={(valores) => alert(valores[0])}
         printOptions='on-focus'
         filterOptions={fuzzySearch}
         placeholder='Seleccionar director'

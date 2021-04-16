@@ -5,9 +5,9 @@ import { FilmsContainer, OptionsContainer, OrderContainer } from './styles';
 import { Loader } from '../../components/Loader';
 import { ListFilm } from '../../components/ListFilm';
 import { FilmSearch } from '../../components/FilmSearch';
-import { addFilms as addFilmsAction } from '../../redux/actions/add-films';
 import { setFilms as setFilmsAction } from '../../redux/actions/set-films';
 import qs from 'query-string';
+import { Paginator } from '../../components/Paginator';
 
 const ListOfFilms = ({ history }) => {
   // Redux
@@ -15,26 +15,36 @@ const ListOfFilms = ({ history }) => {
   const filmIds = entitiesIds.films.ids;
   const totalCount = entitiesIds.films.totalCount;
 
-  // SET INICIAL DE SEARCH DESDE QUERY PARAM
-  const [search, setSearch] = useState(new URLSearchParams(history.location.search).get('search') || '');
-
-  // SET INICIAL DE ORDER DESDE QUERY PARAM
-  const queryOrder = (new URLSearchParams(history.location.search).get('order') || '').toUpperCase();
+  // LOCAL STATE
   const orderValues = ['ASC', 'DESC'];
-  const queryOrderOrDefault = orderValues.find((orderValue) => orderValue === queryOrder) || '';
-  const [order, setOrder] = useState(queryOrderOrDefault);
+  const queryOrder = (new URLSearchParams(history.location.search).get('order') || '').toUpperCase();
+  const initialOrder = orderValues.find((orderValue) => orderValue === queryOrder) || '';
 
-  // SET INICIAL DE PAGE DESDE QUERY PARAM
-  let queryPage = new URLSearchParams(history.location.search).get('page');
-  if (isNaN(queryPage) || queryPage < 0) queryPage = 1;
-  const [page, setPage] = useState(queryPage || 1);
+  const initialSearch = new URLSearchParams(history.location.search).get('search') || '';
+
+  const queryPage = new URLSearchParams(history.location.search).get('page') || 1;
+  const initialPage = isNaN(queryPage) || queryPage < 0 || initialSearch !== '' ? 1 : queryPage;
+
+  const [filters, setFilters] = useState({
+    search: initialSearch,
+    page: initialPage,
+    order: initialOrder,
+  });
+
+  const { search, page, order } = filters;
+
+  const updateFilters = (newFilters) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      ...newFilters,
+    }));
+  };
 
   const dispatch = useDispatch();
 
   const filmsPerPage = parseInt(process.env.REACT_APP_FILMS_PER_PAGES);
 
   const setFilms = () => dispatch(setFilmsAction((page - 1) * filmsPerPage, search, order, auth));
-  const addFilms = (newPage) => dispatch(addFilmsAction((newPage - 1) * filmsPerPage, search, order, auth));
 
   const updateQueryParamsFromState = () => {
     const newQueries = {};
@@ -45,35 +55,35 @@ const ListOfFilms = ({ history }) => {
     history.push({ search: qs.stringify(newQueries) });
   };
 
-  const addFollowingPage = () => {
-    const newPage = page + 1;
-    setPage(newPage);
-    addFilms(newPage);
-  };
+  useEffect(() => {
+    setFilms();
+    updateQueryParamsFromState();
+  }, [filters]);
+
+  const resetPage = () => updateFilters({ page: 1 });
 
   const toggleQueryOrder = (newOrder) => {
-    setPage(0);
+    resetPage();
     if (order === newOrder) {
       history.replace({ path: location.origin + location.pathname + `?order=${newOrder}`, search: search });
-      setOrder('');
+      updateFilters({ order: '' });
     } else {
       history.replace({
         path: location.origin + location.pathname + `?order=${newOrder}`,
         search: `?order=${newOrder}` + search && `&search=${search}`,
       });
-      setOrder(newOrder);
+      updateFilters({ order: newOrder });
     }
   };
 
-  const availablePages = filmIds.length < totalCount;
+  const handlePageChange = (newPage) => {
+    updateFilters({ page: newPage });
+  };
 
-  useEffect(() => {
-    setFilms();
-  }, [order, search]);
-
-  useEffect(() => {
-    updateQueryParamsFromState();
-  }, [order, search, page]);
+  const handleSearch = (newSearch) => {
+    resetPage();
+    updateFilters({ search: newSearch });
+  };
 
   return (
     <Fragment>
@@ -93,7 +103,7 @@ const ListOfFilms = ({ history }) => {
               onClick={() => !fetchInfo.films.fetching && toggleQueryOrder('DESC')}
             />
           </OrderContainer>
-          <FilmSearch setSearch={setSearch} search={search} />
+          <FilmSearch setSearch={handleSearch} search={search} />
         </OptionsContainer>
 
         {filmIds.length > 0 && (
@@ -104,7 +114,16 @@ const ListOfFilms = ({ history }) => {
           </FilmsContainer>
         )}
         {fetchInfo.films.fetching && <Loader />}
-        {filmIds.length > 0 && availablePages && <button onClick={() => addFollowingPage()}>Mostrar mas</button>}
+        {filmIds.length > 0 && (
+          <Paginator
+            onChange={handlePageChange}
+            total={totalCount}
+            disabled={fetchInfo.films.fetching}
+            showSizeChanger={false}
+            defaultCurrent={page}
+            pageSize={process.env.REACT_APP_FILMS_PER_PAGES}
+          />
+        )}
       </>
     </Fragment>
   );

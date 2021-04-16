@@ -13,6 +13,8 @@ import {
   Req,
   Query,
   UseGuards,
+  NotFoundException,
+  HttpException,
 } from "@nestjs/common";
 import { FilmService } from "./film.service";
 import { Film } from "./film.entity";
@@ -27,7 +29,7 @@ import {
 import { FilmDto } from "./dto/film.dto";
 import { PageDto } from "../pagination/pageDto";
 
-@Controller("film")
+@Controller("films")
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 export class FilmController {
@@ -51,7 +53,12 @@ export class FilmController {
   @Get(":id")
   @ApiOkResponse({ description: "Retrieved film." })
   async findById(@Param("id") id: number): Promise<FilmDto> {
-    return await (await this.filmService.findById(id)).toFilmDto();
+    const retrievedFilm = await this.filmService.findById(id);
+
+    if (!retrievedFilm)
+      throw new HttpException("Not Found", HttpStatus.NOT_FOUND);
+
+    return retrievedFilm.toFilmDto();
   }
 
   @Post()

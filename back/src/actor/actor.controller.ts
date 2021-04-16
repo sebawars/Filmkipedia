@@ -15,7 +15,7 @@ import { ApiBearerAuth, ApiOkResponse } from "@nestjs/swagger";
 import { Actor } from "./actor.entity";
 import { ActorDto } from "./dto/actor.dto";
 
-@Controller("actor")
+@Controller("actors")
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 export class ActorController {

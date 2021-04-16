@@ -4,6 +4,7 @@ import { FiPower } from 'react-icons/fi';
 import { useSelector, useDispatch } from 'react-redux';
 import { setAuth as setAuthAction } from '../../redux/actions/set-auth';
 import logo from '../../assets/lens.svg';
+import { LogoutOutlined } from '@ant-design/icons';
 
 const NavBar = () => {
   // Redux
@@ -13,7 +14,6 @@ const NavBar = () => {
 
   const handleLogout = () => {
     setAuth(null);
-    // removeTokenStorage()
   };
 
   return (
@@ -25,10 +25,8 @@ const NavBar = () => {
       {auth && (
         <Link to='/' onClick={handleLogout}>
           <div>
-            <FiPower size='30px' />
+            <LogoutOutlined style={{ fontSize: '2em' }} />
           </div>
-          <br />
-          Salir
         </Link>
       )}
     </Nav>

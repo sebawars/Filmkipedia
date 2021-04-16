@@ -39,7 +39,7 @@ const api = {
       if (search && search.length > 0) optionalFilters += `&search=${search}`;
       if (order && order.length > 0) optionalFilters += `&order=${order}`;
 
-      const res = await callApi(`/film?take=${process.env.REACT_APP_FILMS_PER_PAGES}&skip=${skip}${optionalFilters}`, {
+      const res = await callApi(`/films?take=${process.env.REACT_APP_FILMS_PER_PAGES}&skip=${skip}${optionalFilters}`, {
         headers: authorizationHeader(token),
       });
 
@@ -48,28 +48,28 @@ const api = {
       return res.data;
     },
     async findById(id, token) {
-      const res = await callApi(`/film/${id}`, { headers: authorizationHeader(token) });
+      const res = await callApi(`/films/${id}`, { headers: authorizationHeader(token) });
 
       if (res.status !== 200) throw new Error(res.status);
 
       return res.data;
     },
     create(newFilm, token) {
-      return callApi('/film', {
+      return callApi('/films', {
         method: 'POST',
         body: JSON.stringify(newFilm),
         headers: authorizationHeader(token),
       });
     },
     edit(filmId, modifiedFilm, token) {
-      return callApi(`/film/${filmId}`, {
+      return callApi(`/films/${filmId}`, {
         method: 'PUT',
         body: JSON.stringify(modifiedFilm),
         headers: authorizationHeader(token),
       });
     },
     delete(filmId, token) {
-      return callApi(`/film/${filmId}`, {
+      return callApi(`/films/${filmId}`, {
         method: 'DELETE',
         headers: authorizationHeader(token),
       });
@@ -77,7 +77,7 @@ const api = {
   },
   actor: {
     async list(token) {
-      const res = await callApi('/actor', { headers: authorizationHeader(token) });
+      const res = await callApi('/actors', { headers: authorizationHeader(token) });
       if (res.status !== 200) throw new Error(res.status);
 
       return res.data;
@@ -85,7 +85,7 @@ const api = {
   },
   director: {
     async list(token) {
-      const res = await callApi('/director', { headers: authorizationHeader(token) });
+      const res = await callApi('/directors', { headers: authorizationHeader(token) });
 
       if (res.status !== 200) throw new Error(res.status);
 
@@ -100,7 +100,7 @@ const api = {
       });
     },
     register(inputUser) {
-      return callApi('/user', {
+      return callApi('/users', {
         method: 'POST',
         body: JSON.stringify(inputUser),
       });

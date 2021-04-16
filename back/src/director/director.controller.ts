@@ -15,7 +15,7 @@ import { ApiBearerAuth, ApiOkResponse } from "@nestjs/swagger";
 import { Director } from "./director.entity";
 import { DirectorDto } from "./dto/director.dto";
 
-@Controller("director")
+@Controller("directors")
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 export class DirectorController {

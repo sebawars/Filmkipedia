@@ -27,7 +27,6 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     background: #fefefe;
-    height: 100vh;
     margin: 0 auto;
     overscroll-behavior: none;
     max-width: 70%;

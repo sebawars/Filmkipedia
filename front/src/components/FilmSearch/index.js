@@ -4,14 +4,20 @@ import { useSelector } from 'react-redux';
 const { Search } = Input;
 import './styles.css';
 
-export const FilmSearch = ({ setSearch }) => {
+export const FilmSearch = ({ search, setSearch }) => {
   // Redux
   const { fetchInfo } = useSelector((state) => state);
-  const { loading } = fetchInfo;
 
   const handleSearch = (search) => {
     setSearch(search);
   };
 
-  return <Search className='search-films' placeholder='Buscar' loading={loading} onSearch={handleSearch} />;
+  return (
+    <Search
+      className='search-films'
+      placeholder={search || 'Buscar'}
+      loading={fetchInfo.films.fetching}
+      onSearch={handleSearch}
+    />
+  );
 };

@@ -44,7 +44,6 @@ const api = {
       });
 
       if (res.status !== 200) throw new Error(res.status);
-
       return res.data;
     },
     async findById(id, token) {

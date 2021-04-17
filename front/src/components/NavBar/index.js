@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, Nav, Title, LensIcon } from './styles';
-import { FiPower } from 'react-icons/fi';
 import { useSelector, useDispatch } from 'react-redux';
 import { setAuth as setAuthAction } from '../../redux/actions/set-auth';
 import logo from '../../assets/lens.svg';

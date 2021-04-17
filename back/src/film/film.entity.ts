@@ -4,7 +4,6 @@ import {
   PrimaryGeneratedColumn,
   JoinTable,
   ManyToMany,
-  OneToMany,
   ManyToOne,
 } from "typeorm";
 import { Actor } from "../actor/actor.entity";
@@ -25,6 +24,8 @@ export class Film {
   director: Director;
   @Column()
   image: string;
+  @Column()
+  video: string;
   @ManyToMany((type) => Actor, (actor) => actor.films, {
     eager: true,
     cascade: true,
@@ -39,6 +40,7 @@ export class Film {
     filmDto.release = this.release;
     filmDto.director = this.director;
     filmDto.image = this.image;
+    filmDto.video = this.video;
     filmDto.cast = this.cast;
     return filmDto;
   }

@@ -1,13 +1,14 @@
 import React, { useEffect, Fragment, useState } from 'react';
 import { AiOutlineSortDescending, AiOutlineSortAscending } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
-import { FilmsContainer, OptionsContainer, OrderContainer } from './styles';
+import { OptionsContainer, OrderContainer } from './styles';
 import { Loader } from '../../components/Loader';
-import { ListFilm } from '../../components/ListFilm';
+import { FilmsGrid } from '../../components/FilmsGrid';
 import { FilmSearch } from '../../components/FilmSearch';
 import { setFilms as setFilmsAction } from '../../redux/actions/set-films';
 import qs from 'query-string';
 import { Paginator } from '../../components/Paginator';
+import { NoResults } from '../../components/NoResults';
 
 const ListOfFilms = ({ history }) => {
   // Redux
@@ -106,13 +107,8 @@ const ListOfFilms = ({ history }) => {
           <FilmSearch setSearch={handleSearch} search={search} />
         </OptionsContainer>
 
-        {filmIds.length > 0 && (
-          <FilmsContainer>
-            {filmIds.map((filmId) => (
-              <ListFilm key={filmId} id={filmId} />
-            ))}
-          </FilmsContainer>
-        )}
+        <FilmsGrid filmIds={filmIds} />
+
         {fetchInfo.films.fetching && <Loader />}
         {filmIds.length > 0 && (
           <Paginator
@@ -124,6 +120,7 @@ const ListOfFilms = ({ history }) => {
             pageSize={process.env.REACT_APP_FILMS_PER_PAGES}
           />
         )}
+        <NoResults fetching={fetchInfo.films.fetching} length={filmIds.length} />
       </>
     </Fragment>
   );

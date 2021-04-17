@@ -1,14 +1,14 @@
-import { Film } from '../film.entity';
-import { Actor } from 'src/actor/actor.entity';
-import { Director } from 'src/director/director.entity';
+import { Film } from "../film.entity";
+import { Actor } from "src/actor/actor.entity";
+import { Director } from "src/director/director.entity";
 
 export class FilmDto {
-
   filmname: string;
   cast: Actor[];
   country: string;
   director: Director;
   image: string;
+  video: string;
   release: number;
 
   toFilm(): Film {
@@ -18,6 +18,7 @@ export class FilmDto {
     film.country = this.country;
     film.director = this.director;
     film.image = this.image;
+    film.video = this.video;
     film.release = this.release;
     return film;
   }

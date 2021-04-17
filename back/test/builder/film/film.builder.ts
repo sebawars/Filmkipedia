@@ -1,8 +1,8 @@
-import { Builder } from '../builder';
-import { Film } from '../../../src/film/film.entity';
-import { Director } from 'src/director/director.entity';
-import { Actor } from 'src/actor/actor.entity';
-import { ActorBuilder } from '../actor/actor.builder';
+import { Builder } from "../builder";
+import { Film } from "../../../src/film/film.entity";
+import { Director } from "src/director/director.entity";
+import { Actor } from "src/actor/actor.entity";
+import { ActorBuilder } from "../actor/actor.builder";
 
 export class FilmBuilder extends Builder<Film> {
   constructor() {
@@ -30,6 +30,11 @@ export class FilmBuilder extends Builder<Film> {
     return this;
   }
 
+  withVideo(video: string): FilmBuilder {
+    this.instance.video = video;
+    return this;
+  }
+
   withDirector(director: Director): FilmBuilder {
     this.instance.director = director;
     return this;
@@ -39,5 +44,4 @@ export class FilmBuilder extends Builder<Film> {
     this.instance.cast = cast;
     return this;
   }
-
 }

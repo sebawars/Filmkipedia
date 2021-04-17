@@ -67,22 +67,24 @@ describe("FilmService Tests", (): void => {
       .withImage(
         "https://image.tmdb.org/t/p/w600_and_h900_bestv2/clolk7rB5lAjs41SD0Vt6IXYLMm.jpg"
       )
+      .withVideo("https://www.youtube.com/watch?v=ysz5S6PUM-U")
       .withDirector(existingDirector1)
       .withCast(existingCast1)
       .buildAndPersist();
 
     const existingFilm2: Film = await new FilmBuilder()
-      .withFilmName("Forrest Gump")
+      .withFilmName("Interestellar")
       .withCountry("USA")
       .withRelease(1994)
       .withImage(
-        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/clolk7rB5lAjs41SD0Vt6IXYLMm.jpg"
+        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg"
       )
+      .withVideo("https://www.youtube.com/watch?v=ysz5S6PUM-U")
       .withDirector(existingDirector1)
       .withCast(existingCast1)
       .buildAndPersist();
 
-    const [retrievedFilms, count] = await filmService.findAndPaginate(
+    const [retrievedFilms] = await filmService.findAndPaginate(
       2,
       0,
       null,

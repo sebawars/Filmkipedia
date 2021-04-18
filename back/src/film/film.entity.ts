@@ -26,6 +26,8 @@ export class Film {
   image: string;
   @Column()
   video: string;
+  @Column()
+  description: string;
   @ManyToMany((type) => Actor, (actor) => actor.films, {
     eager: true,
     cascade: true,
@@ -41,6 +43,7 @@ export class Film {
     filmDto.director = this.director;
     filmDto.image = this.image;
     filmDto.video = this.video;
+    filmDto.description = this.description;
     filmDto.cast = this.cast;
     return filmDto;
   }

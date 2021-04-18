@@ -10,7 +10,7 @@ import qs from 'query-string';
 import { Paginator } from '../../components/Paginator';
 import { NoResults } from '../../components/NoResults';
 
-const ListOfFilms = ({ history }) => {
+const FilmList = ({ history }) => {
   // Redux
   const { fetchInfo, auth, entitiesIds } = useSelector((state) => state);
   const filmIds = entitiesIds.films.ids;
@@ -126,4 +126,4 @@ const ListOfFilms = ({ history }) => {
   );
 };
 
-export default ListOfFilms;
+export default FilmList;

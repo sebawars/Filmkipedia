@@ -3,7 +3,6 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Like, Repository } from "typeorm";
 import { Film } from "./film.entity";
 import * as Yup from "yup";
-import { KeyObject } from "crypto";
 
 @Injectable()
 export class FilmService {
@@ -16,7 +15,7 @@ export class FilmService {
   async findAndPaginate(
     take: number,
     skip: number,
-    order: "ASC" | "DESC" | 1 | -1 = "DESC",
+    order: "ASC" | "DESC" | 1 | -1,
     search?: string
   ): Promise<[Film[], number]> {
     this.logger.debug(

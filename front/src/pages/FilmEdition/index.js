@@ -4,12 +4,14 @@ import api from '../../api';
 import { Film } from '../../components/Film';
 import { FilmForm } from '../../components/FilmForm';
 import { Loader } from '../../components/Loader';
+import { FilmCard } from '../../components/FilmCard';
 import { filmByIdSelector } from '../../redux/selectors/filmSelector';
 import { setFetchInfo } from '../../redux/actions/set-fetch-info';
 import SelectSearch, { fuzzySearch } from 'react-select-search';
 import './styles.css';
+import { EditionContainer } from './styles';
 
-export const FilmDetails = (props) => {
+export const FilmEdition = (props) => {
   const [filmData, setFilmData] = useState(null);
   const [listableActors, setListableActors] = useState([]);
   const [listableDirectors, setListableDirectors] = useState([]);
@@ -66,28 +68,12 @@ export const FilmDetails = (props) => {
     asyncEffect();
   }, []);
 
-  return fetchInfo.films.fetching ? (
+  return !filmData || fetchInfo.films.fetching ? (
     <Loader />
   ) : (
-    <>
-      <Film {...filmData} key={1} onChange={handleChange}></Film>
-      <FilmForm {...filmData} key={2} onChange={handleChange} />
-      <SelectSearch
-        options={listableActors}
-        multiple
-        search
-        closeOnSelect={false}
-        printOptions='on-focus'
-        filterOptions={fuzzySearch}
-        placeholder='Agregar actores'
-      />
-      <SelectSearch
-        options={listableDirectors}
-        search
-        printOptions='on-focus'
-        filterOptions={fuzzySearch}
-        placeholder='Seleccionar director'
-      />
-    </>
+    <EditionContainer>
+      <FilmCard style={{ width: '30em', height: '70%' }} film={filmData} />
+      <FilmCard style={{ width: '30em', height: '70%' }} film={filmData} />
+    </EditionContainer>
   );
 };

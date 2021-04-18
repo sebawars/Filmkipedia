@@ -81,7 +81,7 @@ export const GlobalStyles = createGlobalStyle`
 `;
 
 export const Main = styled.main`
-  padding-top: 2em;
+  padding: 2em 0;
   width: 100%;
   margin-top: 60px;
   display: flex;

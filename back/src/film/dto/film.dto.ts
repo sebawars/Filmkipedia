@@ -9,6 +9,7 @@ export class FilmDto {
   director: Director;
   image: string;
   video: string;
+  description: string;
   release: number;
 
   toFilm(): Film {
@@ -19,6 +20,7 @@ export class FilmDto {
     film.director = this.director;
     film.image = this.image;
     film.video = this.video;
+    film.description = this.description;
     film.release = this.release;
     return film;
   }

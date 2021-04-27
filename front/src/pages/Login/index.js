@@ -61,7 +61,6 @@ export const LoginPage = () => {
         onSubmit={onSubmitRegister}
         fetching={fetchInfo.auth.fetching}
       />
-      {fetchInfo.auth.fetching && <Loader />}
     </FormsContainer>
   );
 };

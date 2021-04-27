@@ -1,31 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import api from '../../api';
-import { Film } from '../../components/Film';
-import { FilmForm } from '../../components/FilmForm';
 import { Loader } from '../../components/Loader';
-import { FilmCard } from '../../components/FilmCard';
+import { FilmEditionCard } from '../../components/FilmEditionCard';
 import { filmByIdSelector } from '../../redux/selectors/filmSelector';
 import { setFetchInfo } from '../../redux/actions/set-fetch-info';
-import SelectSearch, { fuzzySearch } from 'react-select-search';
+import { EditionContainer, ButtonsContainer } from './styles';
+import { FilmDetailsModal } from '../../components/FilmDetailsModal';
+import { IdcardOutlined, SaveOutlined, RollbackOutlined } from '@ant-design/icons';
+import { Button, Modal } from 'antd';
 import './styles.css';
-import { EditionContainer } from './styles';
+import api from '../../api';
 
 export const FilmEdition = (props) => {
-  const [filmData, setFilmData] = useState(null);
-  const [listableActors, setListableActors] = useState([]);
-  const [listableDirectors, setListableDirectors] = useState([]);
+  const [film, setFilm] = useState();
+  const [actors, setActors] = useState([]);
+  const [directors, setDirectors] = useState([]);
+  const [initialFilm, setInitialFilm] = useState({});
 
-  const state = useSelector((state) => state);
-  const { fetchInfo, auth } = state;
+  const store = useSelector((state) => state);
+  const { fetchInfo, auth } = store;
   const filmId = props.match.params.filmId;
-  const filmWithId = filmByIdSelector(filmId)(state);
+  const filmWithId = filmByIdSelector(filmId)(store);
 
-  const handleChange = (e) => {
-    setFilmData({
-      ...filmData,
-      [e.target.name]: e.target.value,
-    });
+  const [isDetailsModalVisible, setIsDetailsModalVisible] = useState(false);
+
+  const showDetailsModal = () => setIsDetailsModalVisible(true);
+  const hideDetailsModal = () => setIsDetailsModalVisible(false);
+  const unDoChanges = () => {
+    setFilm(initialFilm);
+  };
+
+  const saveChanges = async () => {
+    dispatch(setFetchInfo({ films: { fetchError: null, fetching: true } }));
+    try {
+      await api.film.save(filmId, film, auth);
+      dispatch(setFetchInfo({ films: { fetchError: null, fetching: false } }));
+      Modal.success({
+        centered: true,
+        content: 'Guardado con éxito',
+      });
+    } catch (error) {
+      dispatch(setFetchInfo({ films: { fetchError: error, fetching: false } }));
+      Modal.warning({
+        centered: true,
+        content: 'Hubo un inconveniente',
+      });
+    }
   };
 
   const dispatch = useDispatch();
@@ -38,26 +58,21 @@ export const FilmEdition = (props) => {
       try {
         if (filmWithId) {
           // Encontramos la pelicula en el store. No fetcheamos
-          setFilmData(filmWithId);
+          setFilm(filmWithId);
+          setInitialFilm(filmWithId);
+          console.log('initialFilm: ' + JSON.stringify(initialFilm));
         } else {
           // No encontramos la pelicula en el store. Fetcheamos
           const fetchedFilm = await api.film.findById(filmId, auth);
-          setFilmData(fetchedFilm);
+          setFilm(fetchedFilm);
+          setInitialFilm(fetchedFilm);
+          console.log('initialFilm: ' + JSON.stringify(initialFilm));
         }
 
         const [fetchedActors, fetchedDirectors] = await Promise.all([api.actor.list(auth), api.director.list(auth)]);
 
-        const listableActors = fetchedActors.map((actor) => ({
-          name: `${actor.name} ${actor.surname}`,
-          value: actor.id,
-        }));
-
-        const listableDirectors = fetchedDirectors.map((director) => ({
-          name: `${director.name} ${director.surname}`,
-          value: director.id,
-        }));
-        setListableActors(listableActors);
-        setListableDirectors(listableDirectors);
+        setActors(fetchedActors);
+        setDirectors(fetchedDirectors);
 
         dispatch(setFetchInfo({ films: { fetchError: null, fetching: false } }));
       } catch (error) {
@@ -68,12 +83,31 @@ export const FilmEdition = (props) => {
     asyncEffect();
   }, []);
 
-  return !filmData || fetchInfo.films.fetching ? (
+  return !film ? (
     <Loader />
   ) : (
-    <EditionContainer>
-      <FilmCard style={{ width: '30em', height: '70%' }} film={filmData} />
-      <FilmCard style={{ width: '30em', height: '70%' }} film={filmData} />
-    </EditionContainer>
+    <>
+      <EditionContainer>
+        <h2>Edición</h2>
+        <FilmEditionCard film={film} setFilm={setFilm} actors={actors} directors={directors} />
+        <ButtonsContainer>
+          <Button style={{ width: 'auto' }} onClick={showDetailsModal} icon={<IdcardOutlined />}>
+            Preview
+          </Button>
+          <Button
+            style={{ width: 'auto' }}
+            loading={fetchInfo.films.fetching}
+            onClick={saveChanges}
+            icon={<SaveOutlined />}
+          >
+            Guardar
+          </Button>
+          <Button style={{ width: 'auto' }} onClick={unDoChanges} icon={<RollbackOutlined />}>
+            Deshacer
+          </Button>
+        </ButtonsContainer>
+      </EditionContainer>
+      <FilmDetailsModal film={film} isModalVisible={isDetailsModalVisible} handleCancel={hideDetailsModal} />
+    </>
   );
 };

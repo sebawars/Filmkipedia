@@ -36,7 +36,7 @@ export const ListFilm = ({ id }) => {
     film && (
       <Col>
         <Card
-          style={{ display: 'flex' }}
+          style={{ display: 'flex', maxWidth: '90%', margin: 'auto' }}
           className={'film-card'}
           bodyStyle={{ padding: 0, display: 'flex', flex: 1, flexDirection: 'column' }}
           cover={
@@ -66,7 +66,7 @@ export const ListFilm = ({ id }) => {
         </Card>
         <PlayerModal
           filmname={film.filmname}
-          video={film.video}
+          id={film.id}
           isModalVisible={isPlayerModalVisible}
           handleCancel={hidePlayerModal}
         />

@@ -72,8 +72,10 @@ export class FilmController {
   }
 
   @Put(":id")
-  @ApiOkResponse({ description: "Film updated." })
+  @HttpCode(201)
+  @ApiCreatedResponse({ description: "Film updated." })
   async update(@Body() filmDto: FilmDto): Promise<FilmDto> {
+    console.log("filmDto: " + JSON.stringify(filmDto));
     const savedFilm: Film = await this.filmService.save(filmDto.toFilm());
 
     return savedFilm.toFilmDto();

@@ -3,6 +3,7 @@ import { Actor } from "src/actor/actor.entity";
 import { Director } from "src/director/director.entity";
 
 export class FilmDto {
+  id: number;
   filmname: string;
   cast: Actor[];
   country: string;
@@ -14,6 +15,7 @@ export class FilmDto {
 
   toFilm(): Film {
     const film: Film = new Film();
+    film.id = this.id;
     film.filmname = this.filmname;
     film.cast = this.cast;
     film.country = this.country;

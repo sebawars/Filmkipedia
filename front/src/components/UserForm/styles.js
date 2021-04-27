@@ -14,6 +14,8 @@ export const Title = styled.h2`
 export const Error = styled.span`
   color: red;
   font-size: 14px;
+  margin-bottom: 1em;
+  display: block;
 `;
 
 export const LoginButton = styled.button`

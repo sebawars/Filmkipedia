@@ -1,14 +1,16 @@
 import styled from 'styled-components';
 
-export const EditionContainer = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-direction: column;
+export const ImageContainer = styled.div`
+  textalign: center;
+  width: 50%;
 `;
+export const FormContainer = styled.div`
+  textalign: center;
+`;
+
 export const ButtonsContainer = styled.div`
   margin-top: 2em;
-  width: 35%;
+  width: 20em;
   display: flex;
   justify-content: space-between;
 `;

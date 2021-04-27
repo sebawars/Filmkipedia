@@ -2,10 +2,10 @@ const BASE_URL = `http://${process.env.REACT_APP_API_DOMAIN}:${process.env.REACT
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const randomNumber = (min = 0, max = 1) => Math.floor(Math.random() * (max - min + 1)) + min;
-const simulateNetworkLatency = (min = 30, max = 1500) => delay(randomNumber(min, max));
+// const simulateNetworkLatency = (min = 30, max = 1500) => delay(randomNumber(min, max));
 
 async function callApi(endpoint, options = {}) {
-  await simulateNetworkLatency();
+  // await simulateNetworkLatency();
 
   const baseHeaders = {
     'Content-Type': 'application/json',
@@ -53,25 +53,16 @@ const api = {
 
       return res.data;
     },
-    create(newFilm, token) {
-      return callApi('/films', {
-        method: 'POST',
-        body: JSON.stringify(newFilm),
-        headers: authorizationHeader(token),
-      });
-    },
-    edit(filmId, modifiedFilm, token) {
-      return callApi(`/films/${filmId}`, {
+    async save(filmId, modifiedFilm, token) {
+      const res = await callApi(`/films/${filmId}`, {
         method: 'PUT',
         body: JSON.stringify(modifiedFilm),
         headers: authorizationHeader(token),
       });
-    },
-    delete(filmId, token) {
-      return callApi(`/films/${filmId}`, {
-        method: 'DELETE',
-        headers: authorizationHeader(token),
-      });
+
+      if (res.status !== 201) throw new Error(res.status);
+
+      return res.data;
     },
   },
   actor: {

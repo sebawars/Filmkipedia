@@ -37,6 +37,7 @@ export class Film {
 
   toFilmDto(): FilmDto {
     const filmDto: FilmDto = new FilmDto();
+    filmDto.id = this.id;
     filmDto.filmname = this.filmname;
     filmDto.country = this.country;
     filmDto.release = this.release;

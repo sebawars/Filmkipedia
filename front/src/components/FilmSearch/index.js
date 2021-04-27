@@ -14,6 +14,7 @@ export const FilmSearch = ({ search, setSearch }) => {
 
   return (
     <Search
+      allowClear
       className='search-films'
       placeholder={search || 'Buscar'}
       loading={fetchInfo.films.fetching}

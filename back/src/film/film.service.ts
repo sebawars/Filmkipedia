@@ -42,12 +42,12 @@ export class FilmService {
     return await this.filmRepository.findOne(id);
   }
 
-  async save(filmDto: Film): Promise<Film> {
+  async save(film: Film): Promise<Film> {
     this.logger.debug(`Upserting film`);
 
-    this.validate(filmDto);
-
-    return this.filmRepository.save(filmDto);
+    console.log("film to update: " + JSON.stringify(film));
+    this.validate(film);
+    return this.filmRepository.save(film);
   }
 
   async delete(id: number): Promise<void> {

@@ -22,6 +22,8 @@ services:
     container_name: "streamer_video_container"
     volumes:
       - assets-data:/var/lib/assets
+    environment:
+      ASSETS_FOLDER: "/var/lib/assets"
     ports:
       - "4000:4000"
     stdin_open: true

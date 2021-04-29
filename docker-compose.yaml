@@ -14,24 +14,6 @@ services:
       - db-data:/var/lib/mysql
     ports:
       - "3306:3306"
-  back_video:
-    build:
-      context: .
-      dockerfile: back/Dockerfile
-    image: "back_video_image"
-    container_name: "back_video_container"
-    ports:
-      - "3010:3010"
-    links:
-      - "db:container_db"
-  front_video:
-    build:
-      context: .
-      dockerfile: front/Dockerfile
-    image: "front_video_image"
-    container_name: "front_video_container"
-    ports:
-      - "3011:3011"
   streamer_video:
     build:
       context: .
@@ -41,8 +23,42 @@ services:
     volumes:
       - assets-data:/var/lib/assets
     ports:
-      - "3012:3012"
+      - "4000:4000"
     stdin_open: true
+  back_video:
+    build:
+      context: .
+      dockerfile: back/Dockerfile
+    image: "back_video_image"
+    container_name: "back_video_container"
+    environment:
+      API_PORT: "3010"
+      TYPEORM_CONNECTION: "mysql"
+      TYPEORM_HOST: "db"
+      TYPEORM_DATABASE: "video"
+      TYPEORM_USERNAME: "user"
+      TYPEORM_PASSWORD: "pass"
+      TYPEORM_LOGGING: "true"
+      TYPEORM_SYNCHRONIZE: "true"
+      JWT_SECRET: "123456"
+      JWT_EXPIRES_IN: "5d"
+    ports:
+      - "3010:3010"
+  front_video:
+    build:
+      context: .
+      dockerfile: front/Dockerfile
+    image: "front_video_image"
+    container_name: "front_video_container"
+    environment:
+      PORT: "3011"
+      REACT_APP_API_HOST: http://localhost
+      REACT_APP_API_PORT: 3010
+      REACT_APP_STREAMER_HOST: http://localhost
+      REACT_APP_STREAMER_PORT: 4000
+      REACT_APP_FILMS_PER_PAGES: "10"
+    ports:
+      - "3011:3011"
 
 volumes:
   db-data:

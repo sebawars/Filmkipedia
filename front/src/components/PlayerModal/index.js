@@ -3,6 +3,8 @@ import ReactPlayer from 'react-player';
 import { Modal } from 'antd';
 
 export const PlayerModal = ({ filmname, id, isModalVisible, handleCancel }) => {
+  const streamerSrc = `${process.env.REACT_APP_STREAMER_HOST}:${process.env.REACT_APP_STREAMER_PORT}`;
+
   return (
     <Modal
       height='initial'
@@ -28,7 +30,7 @@ export const PlayerModal = ({ filmname, id, isModalVisible, handleCancel }) => {
             tracks: [
               {
                 kind: 'subtitles',
-                src: `${process.env.REACT_APP_STREAMER_HOST}/video/${id}/caption`,
+                src: `${streamerSrc}/video/${id}/caption`,
                 srcLang: 'es',
                 label: 'Español',
                 default: true,
@@ -38,7 +40,7 @@ export const PlayerModal = ({ filmname, id, isModalVisible, handleCancel }) => {
         }}
         width='100%'
         height='100%'
-        url={`${process.env.REACT_APP_STREAMER_HOST}/video/${id}`}
+        url={`${streamerSrc}/video/${id}`}
         controls={true}
         stopOnUnmount
       />

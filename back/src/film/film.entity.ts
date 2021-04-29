@@ -26,7 +26,7 @@ export class Film {
   image: string;
   @Column()
   video: string;
-  @Column()
+  @Column({ type: "longtext" })
   description: string;
   @ManyToMany((type) => Actor, (actor) => actor.films, {
     eager: true,

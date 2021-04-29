@@ -7,9 +7,9 @@ RUN mkdir -p /usr/src/app
 COPY ./back /usr/src/app
 WORKDIR /usr/src/app
 
-RUN npm install -g typescript
-RUN npm install
-RUN npm run build
+RUN yarn global add typescript
+RUN yarn install
+RUN yarn run build
 
 EXPOSE 3010
-CMD ["npm", "run", "start:prod"]
+CMD ["yarn", "run", "start:prod"]

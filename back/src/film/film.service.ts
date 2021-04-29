@@ -45,7 +45,6 @@ export class FilmService {
   async save(film: Film): Promise<Film> {
     this.logger.debug(`Upserting film`);
 
-    console.log("film to update: " + JSON.stringify(film));
     this.validate(film);
     return this.filmRepository.save(film);
   }

@@ -1,4 +1,4 @@
-const BASE_URL = process.env.REACT_APP_API_HOST;
+const BASE_URL = `${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}`;
 
 async function callApi(endpoint, options = {}) {
   const baseHeaders = {

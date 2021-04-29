@@ -60,13 +60,11 @@ export const FilmEdition = (props) => {
           // Encontramos la pelicula en el store. No fetcheamos
           setFilm(filmWithId);
           setInitialFilm(filmWithId);
-          console.log('initialFilm: ' + JSON.stringify(initialFilm));
         } else {
           // No encontramos la pelicula en el store. Fetcheamos
           const fetchedFilm = await api.film.findById(filmId, auth);
           setFilm(fetchedFilm);
           setInitialFilm(fetchedFilm);
-          console.log('initialFilm: ' + JSON.stringify(initialFilm));
         }
 
         const [fetchedActors, fetchedDirectors] = await Promise.all([api.actor.list(auth), api.director.list(auth)]);

@@ -7,7 +7,7 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import './styles.css';
 
-const FilmSearch = ({ title, buttonTitle, onSubmit, fetching }) => {
+const UserForm = ({ title, buttonTitle, onSubmit, fetching }) => {
   const email = useInputValue('');
   const password = useInputValue('');
   const [errForm, setErrForm] = useState('');
@@ -84,4 +84,4 @@ const FilmSearch = ({ title, buttonTitle, onSubmit, fetching }) => {
   );
 };
 
-export default FilmSearch;
+export default UserForm;

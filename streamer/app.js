@@ -5,16 +5,14 @@ const app = express();
 
 app.use(cors());
 
-const assetsFolder = __dirname + process.env.ASSETS_FOLDER;
-
 app.get("/video/:id/caption", function (req, res) {
-  res.sendFile(`${assetsFolder}/captions/${req.params.id}.vtt`, {
+  res.sendFile(`assets/captions/${req.params.id}.vtt`, {
     root: __dirname,
   });
 });
 
 app.get("/video/:id", function (req, res) {
-  const path = `${assetsFolder}/${req.params.id}.mp4`;
+  const path = `assets/${req.params.id}.mp4`;
   const stat = fs.statSync(path);
   const fileSize = stat.size;
   const range = req.headers.range;

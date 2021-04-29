@@ -21,7 +21,7 @@ services:
     image: "streamer_video_image"
     container_name: "streamer_video_container"
     volumes:
-      - assets-data:/var/lib/assets
+      - /usr/src/streamer/assets:/var/lib/assets
     environment:
       ASSETS_FOLDER: "../../var/lib/assets"
     ports:

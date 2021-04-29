@@ -5,7 +5,7 @@ const app = express();
 
 app.use(cors());
 
-const assetsFolder = process.env.ASSETS_FOLDER;
+const assetsFolder = __dirname + process.env.ASSETS_FOLDER;
 
 app.get("/video/:id/caption", function (req, res) {
   res.sendFile(`${assetsFolder}/captions/${req.params.id}.vtt`, {

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link, Nav, Title, LensIcon } from './styles';
+import { Link, Nav, Title, PopCornIcon } from './styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { setAuth as setAuthAction } from '../../redux/actions/set-auth';
-import logo from '../../assets/lens.svg';
+import logo from '../../assets/popcorn.svg';
 import { LogoutOutlined } from '@ant-design/icons';
 
 const NavBar = () => {
@@ -18,8 +18,8 @@ const NavBar = () => {
   return (
     <Nav>
       <Link to='/'>
-        <LensIcon src={logo} alt='Logo' />
-        <Title>VideoClub</Title>
+        <PopCornIcon src={logo} alt='Logo' />
+        <Title src={'https://fontmeme.com/permalink/210428/1797eceade9214a505c4ac2b20cf1833.png'}></Title>
       </Link>
       {auth && (
         <Link to='/' onClick={handleLogout}>

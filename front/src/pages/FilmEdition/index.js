@@ -4,7 +4,7 @@ import { Loader } from '../../components/Loader';
 import { FilmEditionCard } from '../../components/FilmEditionCard';
 import { filmByIdSelector } from '../../redux/selectors/filmSelector';
 import { setFetchInfo } from '../../redux/actions/set-fetch-info';
-import { EditionContainer, ButtonsContainer } from './styles';
+import { EditionContainer, ButtonsContainer, ButtonText } from './styles';
 import { FilmDetailsModal } from '../../components/FilmDetailsModal';
 import { IdcardOutlined, SaveOutlined, RollbackOutlined } from '@ant-design/icons';
 import { Button, Modal } from 'antd';
@@ -91,19 +91,14 @@ export const FilmEdition = (props) => {
         <h2>Edición</h2>
         <FilmEditionCard film={film} setFilm={setFilm} actors={actors} directors={directors} />
         <ButtonsContainer>
-          <Button style={{ width: 'auto' }} onClick={showDetailsModal} icon={<IdcardOutlined />}>
-            Preview
+          <Button onClick={showDetailsModal} icon={<IdcardOutlined />}>
+            <ButtonText>Preview</ButtonText>
           </Button>
-          <Button
-            style={{ width: 'auto' }}
-            loading={fetchInfo.films.fetching}
-            onClick={saveChanges}
-            icon={<SaveOutlined />}
-          >
-            Guardar
+          <Button loading={fetchInfo.films.fetching} onClick={saveChanges} icon={<SaveOutlined />}>
+            <ButtonText>Guardar</ButtonText>
           </Button>
-          <Button style={{ width: 'auto' }} onClick={unDoChanges} icon={<RollbackOutlined />}>
-            Deshacer
+          <Button onClick={unDoChanges} icon={<RollbackOutlined />}>
+            <ButtonText>Deshacer</ButtonText>
           </Button>
         </ButtonsContainer>
       </EditionContainer>

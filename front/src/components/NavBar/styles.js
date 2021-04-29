@@ -31,14 +31,21 @@ export const Link = styled(LinkRouter)`
   }
 `;
 
-export const Title = styled.h1`
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
-    'Helvetica Neue', sans-serif;
+// export const Title = styled.h1`
+//   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+//     'Helvetica Neue', sans-serif;
+//   color: #90a4ae;
+//   &:hover {
+//     transform: scale(1.08, 1.08);
+//   }
+//   transition: all 0.3s ease-in-out;
+// `;
+
+export const Title = styled.img`
+  max-height: 2em;
+  max-width: 12em;
   color: #90a4ae;
-  &:hover {
-    transform: scale(1.08, 1.08);
-  }
-  transition: all 0.3s ease-in-out;
+  text-decoration: none;
 `;
 
 const scale = keyframes`
@@ -50,8 +57,6 @@ const scale = keyframes`
   }
 `;
 
-export const LensIcon = styled.img`
-  // animation: ${scale} 1s linear infinite;
-  animation-direction: alternate;
+export const PopCornIcon = styled.img`
   max-height: 45px;
 `;

@@ -8,7 +8,19 @@ export const EditionContainer = styled.div`
 `;
 export const ButtonsContainer = styled.div`
   margin-top: 2em;
-  width: 35%;
+  width: 30em;
+  max-width: 60%
   display: flex;
   justify-content: space-between;
+
+  button {
+    width: auto;
+    min-width: 3em;
+  }
+`;
+
+export const ButtonText = styled.span`
+  @media (max-width: 656px) {
+    display: none !important;
+  }
 `;

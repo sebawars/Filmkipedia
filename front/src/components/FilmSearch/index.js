@@ -14,6 +14,7 @@ export const FilmSearch = ({ search, setSearch }) => {
 
   return (
     <Search
+      style={{ minWidth: '10em' }}
       allowClear
       className='search-films'
       placeholder={search || 'Buscar'}

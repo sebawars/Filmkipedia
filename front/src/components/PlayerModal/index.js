@@ -28,7 +28,7 @@ export const PlayerModal = ({ filmname, id, isModalVisible, handleCancel }) => {
             tracks: [
               {
                 kind: 'subtitles',
-                src: `http://192.168.0.36:4000/video/${id}/caption`,
+                src: `${process.env.REACT_APP_STREAMER_HOST}/video/${id}/caption`,
                 srcLang: 'es',
                 label: 'Español',
                 default: true,
@@ -38,19 +38,10 @@ export const PlayerModal = ({ filmname, id, isModalVisible, handleCancel }) => {
         }}
         width='100%'
         height='100%'
-        url={`http://192.168.0.36:4000/video/${id}`}
+        url={`${process.env.REACT_APP_STREAMER_HOST}/video/${id}`}
         controls={true}
+        stopOnUnmount
       />
-      {/* <video controls muted autoPlay crossOrigin='anonymous'>
-        <source src={`http://localhost:4000/video/6`} type='video/mp4'></source>
-        <track
-          label='English'
-          kind='captions'
-          srcLang='en'
-          src={`http://localhost:4000/video/6/caption`}
-          default
-        ></track>
-      </video> */}
     </Modal>
   );
 };

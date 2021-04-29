@@ -31,7 +31,8 @@ const FilmSearch = ({ title, buttonTitle, onSubmit, fetching }) => {
       password: password.value,
     });
 
-    if (!data.access_token) setErrForm('Verifique usuario/contraseña');
+    if (!data) setErrForm('Hubo un problema');
+    else if (!data.access_token) setErrForm('Verifique usuario/contraseña');
     else {
       setErrForm('');
       setAuth(data.access_token);

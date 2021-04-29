@@ -1,5 +1,6 @@
 dist/
 build/
+assets/
 
 # dependencies
 node_modules/

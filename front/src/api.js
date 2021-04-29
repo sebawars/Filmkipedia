@@ -1,12 +1,6 @@
-const BASE_URL = `http://${process.env.REACT_APP_API_DOMAIN}:${process.env.REACT_APP_API_PORT}`;
-
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-const randomNumber = (min = 0, max = 1) => Math.floor(Math.random() * (max - min + 1)) + min;
-// const simulateNetworkLatency = (min = 30, max = 1500) => delay(randomNumber(min, max));
+const BASE_URL = process.env.REACT_APP_API_HOST;
 
 async function callApi(endpoint, options = {}) {
-  // await simulateNetworkLatency();
-
   const baseHeaders = {
     'Content-Type': 'application/json',
     Accept: 'application/json',

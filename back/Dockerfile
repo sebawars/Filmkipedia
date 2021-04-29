@@ -7,6 +7,7 @@ RUN mkdir -p /usr/src/app
 COPY ./back /usr/src/app
 WORKDIR /usr/src/app
 
+RUN npm install -g typescript
 RUN npm install
 RUN npm run build
 

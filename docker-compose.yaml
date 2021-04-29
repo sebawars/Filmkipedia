@@ -1,4 +1,4 @@
-version: "2.1"
+version: "3.3"
 
 services:
   db:
@@ -6,12 +6,12 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
-      MYSQL_USER: 'user'
-      MYSQL_PASSWORD: 'pass'
-      MYSQL_ROOT_PASSWORD: 'pass'
-      MYSQL_DATABASE: 'video'
+      MYSQL_USER: "user"
+      MYSQL_PASSWORD: "pass"
+      MYSQL_ROOT_PASSWORD: "pass"
+      MYSQL_DATABASE: "video"
     volumes:
-      - db-data:/home/ec2-user/VideoClub/mysql/volume
+      - db-data:/var/lib/mysql
     ports:
       - "3306:3306"
   back_video:
@@ -31,7 +31,19 @@ services:
     image: "front_video_image"
     container_name: "front_video_container"
     ports:
-    - "3011:3011"
+      - "3011:3011"
+  streamer_video:
+    build:
+      context: .
+      dockerfile: streamer/Dockerfile
+    image: "streamer_video_image"
+    container_name: "streamer_video_container"
+    volumes:
+      - assets-data:/var/lib/assets
+    ports:
+      - "3012:3012"
     stdin_open: true
+
 volumes:
   db-data:
+  assets-data:

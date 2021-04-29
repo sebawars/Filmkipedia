@@ -16,3 +16,46 @@
   font-size: 14px;
   line-height: 22px;
 }
+
+.film-edition-card {
+  height: 100%;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.23);
+  width: 80%;
+  display: flex;
+  min-width: 50%;
+  max-width: 990px;
+}
+
+@media (max-width: 1200px) {
+  .film-edition-card {
+    display: block;
+    max-width: 25em;
+  }
+}
+
+.ant-card-body {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  align-items: center;
+  text-align: center;
+}
+
+@media (max-width: 1200px) {
+  .ant-card-body {
+    display: block;
+    margin: auto;
+  }
+}
+
+.film-edition-card-image {
+  width: 100%;
+  max-width: 25em;
+  margin: auto;
+}
+
+@media (max-width: 1200px) {
+  .film-edition-card-image {
+    margin-bottom: 1em;
+  }
+}

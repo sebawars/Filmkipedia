@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 export const ImageContainer = styled.div`
-  textalign: center;
+  text-align: center;
   width: 50%;
 `;
 export const FormContainer = styled.div`
-  textalign: center;
+  text-align: center;
 `;
 
 export const ButtonsContainer = styled.div`

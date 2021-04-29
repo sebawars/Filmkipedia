@@ -22,3 +22,9 @@ export const OrderContainer = styled.div`
   align-items: center;
   display: flex;
 `;
+
+export const OrderText = styled.span`
+  @media (max-width: 410px) {
+    display: none;
+  }
+`;

@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment, useState } from 'react';
 import { AiOutlineSortDescending, AiOutlineSortAscending } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
-import { OptionsContainer, OrderContainer } from './styles';
+import { OptionsContainer, OrderContainer, OrderText } from './styles';
 import { Loader } from '../../components/Loader';
 import { FilmsGrid } from '../../components/FilmsGrid';
 import { FilmSearch } from '../../components/FilmSearch';
@@ -91,7 +91,7 @@ const FilmList = ({ history }) => {
       <>
         <OptionsContainer>
           <OrderContainer>
-            <span>Ordenar&nbsp;&nbsp;</span>
+            <OrderText>Ordenar&nbsp;&nbsp;</OrderText>
             <AiOutlineSortAscending
               cursor='pointer'
               size={order.toUpperCase() === 'ASC' ? '1.9em' : '1.5em'}

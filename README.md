@@ -1,9 +1,9 @@
-## Web VideoClub ⚛️
+## Filmkipedia ⚛️
 
-#### Gestión de peliculas.  
+#### Webapp de películas donde los usuarios, además de verlas, pueden corregir datos que consideren incorrectos.  
 
   <details>
-	<summary> Consigna </summary>
+	<summary> Consigna original </summary>
 
 <br>Imaginate que te contratan de un videoclub que quiere construir un catálogo web y exponer todas sus películas a través de una API REST. 
 
@@ -46,28 +46,26 @@
 	
 #### Desplegada en: 
 	
-  * API: http://ec2-52-87-152-250.compute-1.amazonaws.com:3010
-  * FRONT: http://ec2-52-87-152-250.compute-1.amazonaws.com:3011
+  * API: próximamente en linode
+  * FRONT: próximamente en linode
     
-#### Diagrama de clases:
-
-  * https://app.diagrams.net/#G1B5BsmrNDS8ifElJnjf0V8BynSa1hWRay
-
 #### Swagger:
 
-  * http://ec2-52-87-152-250.compute-1.amazonaws.com:3010/api/
+  * próximamente en linode
 
 
 #### Para su armado se utilizó:
 	
   * Obtención de datos:
-       fetch hacia la API.  
+       Fetch hacia la API.  
+       Redux y Saga.  
        Servidor en Nest JS con TypeORM.  
-       BD: MYSQL  
+       BD: MYSQL.  
+       Streamer: Backend en Express JS.
        
   * Despliegue:
        Contenedor Docker.  
-       AWS EC2.  
+       Linode.  
   
   * Empaquetador y transpilador front:
        Webpack, Babel (interno de create-react-app)
@@ -76,30 +74,7 @@
        styled-components
 
   * Enrutado SPA:
-       Reach Router
+       React Router
 			
   * Testing:
-       Jest. Pruebas unitarias de servicios en server.  
-       Cypress en front.  
-
-#### Pasos despliegue (necesario tener libres puertos 3010 y 3011):
-
-  * con docker:
-
-       git clone https://github.com/sebawars/VideoClub  
-       cd VideoClub/  
-       docker-compose build  
-       docker-compose up  
-       ó  
-       docker-compose up -d para independizar CLI  
-       
-  * sin docker:
-
-       git clone https://github.com/sebawars/VideoClub  
-       cd VideoClub/back  
-       npm install  
-       npm run start  
-       (volver a raíz)  
-       cd VideoClub/front  
-       npm install  
-       npm run start  
+       Jest. Pruebas unitarias de servicios en server (Nest).  

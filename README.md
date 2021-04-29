@@ -43,6 +43,8 @@
     + Tests unitarios de la capa de servicio.
     + Utilización de una arquitectura de 3 capas.
   </details>
+  
+#### Backlog con pendientes: https://trello.com/b/SgBDJjjS/filmkipedia
 	
 #### Desplegada en: 
 	

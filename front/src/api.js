@@ -10,6 +10,7 @@ async function callApi(endpoint, options = {}) {
 
   const url = BASE_URL + endpoint;
   const res = await fetch(url, options);
+
   const data = (res.headers.get('Content-Length') !== '0' && (await res.json())) || {};
 
   const status = res.status;

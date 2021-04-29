@@ -81,7 +81,7 @@ export const FilmEdition = (props) => {
     asyncEffect();
   }, []);
 
-  return !film ? (
+  return !film || fetchInfo.fetching ? (
     <Loader />
   ) : (
     <>

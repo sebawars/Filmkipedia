@@ -53,46 +53,42 @@ export const FilmEditionCard = ({ film, setFilm, actors, directors, style }) => 
 
               <Form.Item label='Director'>
                 <Select
-                  value={director.id}
                   showArrow
                   placeholder='Buscar'
-                  filterOption={(inputValue, option) => option.name.includes(inputValue)}
-                  onChange={(directorId) =>
+                  options={directors.map(({ name, surname }) => ({ value: `${name} ${surname}` }))}
+                  value={`${director.name} ${director.surname}`}
+                  filterOption={(inputValue, option) =>
+                    option.value.toLocaleLowerCase().includes(inputValue.toLocaleLowerCase())
+                  }
+                  onChange={(selectedDirector) =>
                     handleSelectChange(
                       'director',
-                      directors.find((director) => director.id === parseInt(directorId)),
+                      directors.find((eachDirector) =>
+                        selectedDirector.includes(`${eachDirector.name} ${eachDirector.surname}`),
+                      ),
                     )
                   }
-                >
-                  {directors.map(({ id, name, surname }) => (
-                    <Option key={id} value={id} name={`${name} ${surname}`}>
-                      {`${name} ${surname}`}
-                    </Option>
-                  ))}
-                </Select>
+                ></Select>
               </Form.Item>
 
               <Form.Item label='Reparto'>
                 <Select
-                  value={cast.map((actor) => actor.id)}
                   mode='multiple'
                   allowClear
                   showArrow
                   placeholder='Buscar'
-                  filterOption={(inputValue, option) => option.name.includes(inputValue)}
-                  onChange={(actorsIds) =>
+                  options={actors.map(({ name, surname }) => ({ value: `${name} ${surname}` }))}
+                  value={cast.map(({ name, surname }) => `${name} ${surname}`)}
+                  filterOption={(inputValue, option) =>
+                    option.value.toLocaleLowerCase().includes(inputValue.toLocaleLowerCase())
+                  }
+                  onChange={(selectedActors) =>
                     handleSelectChange(
                       'cast',
-                      actors.filter((actor) => actorsIds.includes(actor.id)),
+                      actors.filter(({ name, surname }) => selectedActors.includes(`${name} ${surname}`)),
                     )
                   }
-                >
-                  {actors.map(({ id, name, surname }) => (
-                    <Option key={id} value={id} name={`${name} ${surname}`}>
-                      {`${name} ${surname}`}
-                    </Option>
-                  ))}
-                </Select>
+                ></Select>
               </Form.Item>
             </Form>
           )}

@@ -73,9 +73,6 @@
 			
   * Estilado con CSS en JS con:
        styled-components
-
-  * Enrutado SPA:
-       React Router
-			
+       
   * Testing:
        Jest. Pruebas unitarias de servicios en server (Nest).  

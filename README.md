@@ -2,6 +2,10 @@
 
 #### Webapp de películas donde los usuarios, además de verlas, pueden corregir datos que consideren incorrectos.  
 
+#### Despliegue: 
+	
+  * li2294-170.members.linode.com:3011
+
   <details>
 	<summary> Consigna original </summary>
 
@@ -45,11 +49,6 @@
   </details>
   
 #### Backlog con pendientes: https://trello.com/b/SgBDJjjS/filmkipedia
-	
-#### Desplegada en: 
-	
-  * API: próximamente en linode
-  * FRONT: próximamente en linode
     
 #### Swagger:
 
@@ -74,9 +73,6 @@
 			
   * Estilado con CSS en JS con:
        styled-components
-
-  * Enrutado SPA:
-       React Router
-			
+       
   * Testing:
        Jest. Pruebas unitarias de servicios en server (Nest).  

@@ -65,7 +65,7 @@
        Streamer: Backend en Express JS.
        
   * Despliegue:
-       Contenedor Docker.  
+       Contenedores a partir de Docker compose.  
        Linode.  
   
   * Empaquetador y transpilador front:
@@ -75,4 +75,4 @@
        styled-components
        
   * Testing:
-       Jest. Pruebas unitarias de servicios en server (Nest).  
+       Jest. Pruebas unitarias de servicios en Nest (resta completar y verificar coverage).  

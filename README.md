@@ -4,7 +4,7 @@
 
 #### Despliegue: 
 	
-  * li2294-170.members.linode.com:3011
+  * Re-desplegando en Linode
 
   <details>
 	<summary> Consigna original </summary>

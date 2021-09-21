@@ -2,7 +2,7 @@
 
 #### Webapp de películas donde los usuarios, además de verlas, pueden corregir datos que consideren incorrectos.  
 
-#### Despliegue (pendiente carga de videos de peliculas): 
+#### Despliegue: 
 	
   * http://li2285-70.members.linode.com:3011/ 
 

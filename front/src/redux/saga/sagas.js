@@ -27,7 +27,8 @@ function* fetchFilms({ type, payload: { skip, search, order, auth } }) {
     }
   } catch (e) {
     // TODO
-    yield all([put(setAuth(auth))]);
+    
+    yield all([put(setAuth(null))]);
     error = e.message;
   } finally {
     yield put(setFetchInfo({ films: { fetchError: error, fetching: false } }));

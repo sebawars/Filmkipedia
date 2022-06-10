@@ -52,9 +52,9 @@ services:
     container_name: "front_video_container"
     environment:
       PORT: "3011"
-      REACT_APP_API_HOST: http://li2285-70.members.linode.com
+      REACT_APP_API_HOST: http://45-79-202-116.ip.linodeusercontent.com
       REACT_APP_API_PORT: 3010
-      REACT_APP_STREAMER_HOST: http://li2285-70.members.linode.com
+      REACT_APP_STREAMER_HOST: http://45-79-202-116.ip.linodeusercontent.com
       REACT_APP_STREAMER_PORT: 4000
       REACT_APP_FILMS_PER_PAGES: "10"
     ports:

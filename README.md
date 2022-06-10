@@ -1,10 +1,12 @@
 ## Filmkipedia ⚛️
 
+#### Pendientes deseables: reescribir back y front con TDD.
+
 #### Webapp de películas donde los usuarios, además de verlas, pueden corregir datos que consideren incorrectos.  
 
 #### Despliegue: 
 	
-  * http://li2285-70.members.linode.com:3011/ 
+  * http://45-79-202-116.ip.linodeusercontent.com:3011/ 
 
   <details>
 	<summary> Consigna original </summary>
